@@ -1,0 +1,2022 @@
+    // svg 保存
+    function saveSvg() {
+
+        svgTxt = $("#svg").html();
+        //alert(svgTxt);	
+        var stxt = svgTxt;
+        var blob = new Blob([stxt], {
+            type: "svg/plain"
+        });
+        //var url = window.webkitURL.createObjectURL(blob);
+        var url = window.URL.createObjectURL(blob);
+
+        document.getElementById("export").href = url;
+
+
+        setTimeout("svgDown()", 100);
+
+    }
+
+
+    function svgDown() {
+        document.getElementById("export").click();
+    }
+
+
+
+
+
+    var userAgent = window.navigator.userAgent.toLowerCase();
+
+
+
+    $(function () {
+        //
+
+
+
+
+
+        if (userAgent.indexOf('msie') != -1 || userAgent.indexOf('trident') != -1) {
+            taiou();
+        } else if (userAgent.indexOf('edge') != -1) {
+            taiou();
+        } else if (userAgent.indexOf('chrome') != -1) {
+            //    console.log('Google Chrome');
+        } else if (userAgent.indexOf('safari') != -1) {
+            //    taiou();
+        } else if (userAgent.indexOf('firefox') != -1) {
+            console.log('FireFox');
+        } else if (userAgent.indexOf('opera') != -1) {
+            console.log('Opera');
+        } else {
+            console.log('none');
+        }
+
+
+        function taiou() {
+            $("#downBtnIE,#sizeSlider,#colorBox,#size").css("display", "block");
+            $("#format,#sizeSlider").css("display", "none");
+            sizeChange(500);
+        }
+
+        var colorNum = 1; //何色つかっているか？
+        //枠の有り無しフラグ
+        var vFlag = true;
+        var lineExsistFlag1 = false;
+        var lineExsistFlag2 = false;
+        var lineExsistFlag3 = false;
+
+        //カラーをリセットしたときに戻せるようにするための変数
+        var myColor1;
+        var myColor2;
+        var myColor3;
+        //透明化の有無
+        var eyeflag1 = false;
+        var eyeflag2 = false;
+        var eyeflag3 = false;
+        //カラーの数
+        var colorNum;
+        //バリエーションのうち何番を選択しているか？
+        var index = 1;
+        var lineVal = 5; //ライン太さ
+        var txtXpos = 50; //テキストのX位置
+        var txtYpos = 50; //テキストのY位置
+        var txtXpos2 = 50; //テキスト2のX位置
+        var txtYpos2 = 50; //テキスト2のY位置
+        var txtoffset = 0.34; //テキスト行間
+        var txtoffset2 = 0.34; //テキスト2行間
+        var bgFlag = false;
+        var IEsize = "s500"; //IEでのサイズ
+        var iniMyColors = [];
+        //サムネイル
+        //ローカル
+        //        var hinban = "f0768";
+        //        var sozaiNum = 6;
+        //ローカル
+        //var folder = "f/" + hinban + "/tn_" + hinban + ".png";
+        var folder = "/f/" + hinban + "/tn_" + hinban + ".png";
+        $('div#tnlist ul li').css('background-image', 'url("' + folder + '")');
+
+        //素材数にサムネイルli数を合わせる
+        for (var i = 10; i > sozaiNum; i--) {
+            $('div#tnlist ul li:nth-child(' + i + ')').hide();
+        }
+        //最初のSVGを設置
+
+        //ローカル
+        //$('#svg').load("f/" + hinban + "/" + hinban + "_0.svg");
+        $('#svg').load("/f/" + hinban + "/" + hinban + "_0.svg", function () {
+            getCssColor();
+            eyeAllOpen();
+            wakuALLHide();
+            setDLformatPosition();
+            $('#txtEditor,#txtEditor2').hide();
+        });
+        //ダウンロードファイル名を品番に
+
+
+        function iniDlName() {
+            $("#ss").attr("download", hinban + "_" + index + ".png");
+            $("#jj").attr("download", hinban + "_" + index + ".jpg");
+            $("#export").attr("download", hinban + "_" + index + ".svg");
+        }
+        iniDlName();
+        resetBtnHide();
+
+        //jquery ui slider実装
+        $('#sizeSlider').slider({
+            max: 1920, //最大値
+            min: 100, //最小値
+            value: 512, //初期値
+            step: 1, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                sizeChange(ui.value);
+            },
+            create: function (event, ui) {
+                sizeChange(ui.value);
+            },
+            start: function (event, ui) {
+                sizeChange(ui.value);
+            },
+            stop: function (event, ui) {
+                sizeChange(ui.value);
+            },
+            change: function (event, ui) {
+                sizeChange(ui.value);
+            }
+        });
+        $('#lineSlider1').slider({
+            max: 16, //最大値
+            min: 0, //最小値
+            value: 0, //初期値
+            step: 1, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                lineChange(ui.value);
+            },
+            create: function (event, ui) {
+                lineChange(ui.value);
+            },
+            start: function (event, ui) {
+                lineChange(ui.value);
+            },
+            stop: function (event, ui) {
+                lineChange(ui.value);
+            },
+            change: function (event, ui) {
+                lineChange(ui.value);
+            }
+        });
+        $('#lineSlider2').slider({
+            max: 16, //最大値
+            min: 0, //最小値
+            value: 0, //初期値
+            step: 1, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                lineChange2(ui.value);
+            },
+            create: function (event, ui) {
+                lineChange2(ui.value);
+            },
+            start: function (event, ui) {
+                lineChange2(ui.value);
+            },
+            stop: function (event, ui) {
+                lineChange2(ui.value);
+            },
+            change: function (event, ui) {
+                lineChange2(ui.value);
+            }
+        });
+
+        $('#lineSlider3').slider({
+            max: 16, //最大値
+            min: 0, //最小値
+            value: 0, //初期値
+            step: 1, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                lineChange3(ui.value);
+            },
+            create: function (event, ui) {
+                lineChange3(ui.value);
+            },
+            start: function (event, ui) {
+                lineChange3(ui.value);
+            },
+            stop: function (event, ui) {
+                lineChange3(ui.value);
+            },
+            change: function (event, ui) {
+                lineChange3(ui.value);
+            }
+        });
+        $('#lineSlider4').slider({
+            max: 16, //最大値
+            min: 0, //最小値
+            value: 0, //初期値
+            step: 1, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                lineChange4(ui.value);
+            },
+            create: function (event, ui) {
+                lineChange4(ui.value);
+            },
+            start: function (event, ui) {
+                lineChange4(ui.value);
+            },
+            stop: function (event, ui) {
+                lineChange4(ui.value);
+            },
+            change: function (event, ui) {
+                lineChange4(ui.value);
+            }
+        });
+        $('#lineSlider5').slider({
+            max: 16, //最大値
+            min: 0, //最小値
+            value: 0, //初期値
+            step: 1, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                lineChange5(ui.value);
+            },
+            create: function (event, ui) {
+                lineChange5(ui.value);
+            },
+            start: function (event, ui) {
+                lineChange5(ui.value);
+            },
+            stop: function (event, ui) {
+                lineChange5(ui.value);
+            },
+            change: function (event, ui) {
+                lineChange5(ui.value);
+            }
+        });
+        $('#lineSlider6').slider({
+            max: 16, //最大値
+            min: 0, //最小値
+            value: 0, //初期値
+            step: 1, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                lineChange6(ui.value);
+            },
+            create: function (event, ui) {
+                lineChange6(ui.value);
+            },
+            start: function (event, ui) {
+                lineChange6(ui.value);
+            },
+            stop: function (event, ui) {
+                lineChange6(ui.value);
+            },
+            change: function (event, ui) {
+                lineChange6(ui.value);
+            }
+        });
+        //jquery ui slider実装
+        //文字の大きさ
+        $('#mojiScaleSlider').slider({
+            max: 150, //最大値
+            min: 18, //最小値
+            value: 60, //初期値
+            step: 1, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                txtSizeChage(ui.value);
+            },
+            create: function (event, ui) {
+                txtSizeChage(ui.value);
+            },
+            start: function (event, ui) {
+                txtSizeChage(ui.value);
+            },
+            stop: function (event, ui) {
+                txtSizeChage(ui.value);
+            },
+            change: function (event, ui) {
+                txtSizeChage(ui.value);
+            }
+        });
+
+        //jquery ui slider実装
+        //文字の位置X
+        $('#mojiXposSlider').slider({
+            max: 100, //最大値
+            min: 0, //最小値
+            value: 50, //初期値
+            step: 1, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                txtXposChage(ui.value);
+            },
+            create: function (event, ui) {
+                txtXposChage(ui.value);
+            },
+            start: function (event, ui) {
+                txtXposChage(ui.value);
+            },
+            stop: function (event, ui) {
+                txtXposChage(ui.value);
+            },
+            change: function (event, ui) {
+                txtXposChage(ui.value);
+            }
+        });
+        //jquery ui slider実装
+        //文字の位置Y
+        $('#mojiYposSlider').slider({
+            max: 100, //最大値
+            min: 0, //最小値
+            value: 50, //初期値
+            step: 1, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                txtYposChage(ui.value);
+            },
+            create: function (event, ui) {
+                txtYposChage(ui.value);
+            },
+            start: function (event, ui) {
+                txtYposChage(ui.value);
+            },
+            stop: function (event, ui) {
+                txtYposChage(ui.value);
+            },
+            change: function (event, ui) {
+                txtYposChage(ui.value);
+            }
+        });
+        $('#textoffsetSlider').slider({
+            max: 1.2, //最大値
+            min: 0.15, //最小値
+            value: 0.34, //初期値
+            step: 0.05, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                textoffsetChage(ui.value);
+            },
+            create: function (event, ui) {
+                textoffsetChage(ui.value);
+            },
+            start: function (event, ui) {
+                textoffsetChage(ui.value);
+            },
+            stop: function (event, ui) {
+                textoffsetChage(ui.value);
+            },
+            change: function (event, ui) {
+                textoffsetChage(ui.value);
+            }
+        });
+        //文字の大きさ
+        $('#mojiScaleSlider2').slider({
+            max: 150, //最大値
+            min: 18, //最小値
+            value: 60, //初期値
+            step: 1, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                txtSizeChage2(ui.value);
+            },
+            create: function (event, ui) {
+                txtSizeChage2(ui.value);
+            },
+            start: function (event, ui) {
+                txtSizeChage2(ui.value);
+            },
+            stop: function (event, ui) {
+                txtSizeChage2(ui.value);
+            },
+            change: function (event, ui) {
+                txtSizeChage2(ui.value);
+            }
+        });
+
+        //jquery ui slider実装
+        //文字の位置X
+        $('#mojiXposSlider2').slider({
+            max: 100, //最大値
+            min: 0, //最小値
+            value: 50, //初期値
+            step: 1, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                txtXposChage2(ui.value);
+            },
+            create: function (event, ui) {
+                txtXposChage2(ui.value);
+            },
+            start: function (event, ui) {
+                txtXposChage2(ui.value);
+            },
+            stop: function (event, ui) {
+                txtXposChage2(ui.value);
+            },
+            change: function (event, ui) {
+                txtXposChage2(ui.value);
+            }
+        });
+        //jquery ui slider実装
+        //文字の位置Y
+        $('#mojiYposSlider2').slider({
+            max: 100, //最大値
+            min: 0, //最小値
+            value: 50, //初期値
+            step: 1, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                txtYposChage2(ui.value);
+            },
+            create: function (event, ui) {
+                txtYposChage2(ui.value);
+            },
+            start: function (event, ui) {
+                txtYposChage2(ui.value);
+            },
+            stop: function (event, ui) {
+                txtYposChage2(ui.value);
+            },
+            change: function (event, ui) {
+                txtYposChage2(ui.value);
+            }
+        });
+        $('#textoffsetSlider2').slider({
+            max: 1.2, //最大値
+            min: 0.15, //最小値
+            value: 0.34, //初期値
+            step: 0.05, //幅
+            //orientation: "vertical", //縦設置か横設置か
+
+            slide: function (event, ui) {
+                textoffsetChage2(ui.value);
+            },
+            create: function (event, ui) {
+                textoffsetChage2(ui.value);
+            },
+            start: function (event, ui) {
+                textoffsetChage2(ui.value);
+            },
+            stop: function (event, ui) {
+                textoffsetChage2(ui.value);
+            },
+            change: function (event, ui) {
+                textoffsetChage2(ui.value);
+            }
+        });
+
+        var winWidth = $(window).width();
+
+        if (winWidth < 600) {
+            sizeChange(320);
+            $('#sizeSlider').slider('value', 320);
+        } else {
+            sizeChange(512);
+        }
+
+        //SVGロード時のCSSカラーを取得する
+        function getCssColor() {
+            colorNum = 0;
+            iniMyColors = ["none"];
+            var cssColor1 = $('#svg svg .st0').css('fill');
+            iniMyColors.push(cssColor1);
+            var cssColor2 = $('#svg svg .st1').css('fill');
+            iniMyColors.push(cssColor2);
+            var cssColor3 = $('#svg svg .st2').css('fill');
+            iniMyColors.push(cssColor3);
+            var cssColor4 = $('#svg svg .st3').css('fill');
+            iniMyColors.push(cssColor4);
+            var cssColor5 = $('#svg svg .st4').css('fill');
+            iniMyColors.push(cssColor5);
+            var cssColor6 = $('#svg svg .st5').css('fill');
+            iniMyColors.push(cssColor6);
+
+            if (cssColor1 != null) {
+                myColor1 = colorRGBTo16(cssColor1);
+                colorNum = 1;
+                $('#colorBox1').show();
+            } else {
+                myColor1 = "none";
+                $('#colorBox1').hide();
+            }
+            if (cssColor2 != null) {
+                myColor2 = colorRGBTo16(cssColor2);
+                colorNum = 2;
+                $('#colorBox2').show();
+            } else {
+                myColor2 = "none";
+                $('#colorBox2').hide();
+            }
+            if (cssColor3 != null) {
+                myColor3 = colorRGBTo16(cssColor3);
+                colorNum = 3;
+                $('#colorBox3').show();
+            } else {
+
+                myColor3 = "none";
+
+                $('#colorBox3').hide();
+            }
+            if (cssColor4 != null) {
+                myColor4 = colorRGBTo16(cssColor4);
+                colorNum = 4;
+                $('#colorBox4').show();
+            } else {
+
+                myColor4 = "none";
+                $('#colorBox4').hide();
+            }
+            if (cssColor5 != null) {
+                myColor5 = colorRGBTo16(cssColor5);
+                colorNum = 5;
+                $('#colorBox5').show();
+            } else {
+
+                myColor5 = "none";
+
+                $('#colorBox5').hide();
+            }
+            if (cssColor6 != null) {
+                myColor6 = colorRGBTo16(cssColor6);
+                colorNum = 6;
+                $('#colorBox6').show();
+            } else {
+
+                myColor6 = "none";
+
+                $('#colorBox6').hide();
+            }
+            setIniColor(myColor1, myColor2, myColor3, myColor4, myColor5, myColor6);
+
+        }
+        //RGBを16進数に変換する関数
+        colorRGBTo16 = function (col) {
+            return "#" + col.match(/\d+/g).map(function (a) {
+                return ("0" + parseInt(a).toString(16)).slice(-2)
+            }).join("");
+        }
+
+
+        //ランダムカラーをセットする
+        function setRandomColor() {
+
+            for (var i = 0; i < colorNum; i++) {
+                var tempMycolor = randColor();
+                $(".st" + i).css('fill', tempMycolor);
+                var arrMYnonColor = ["none", "none", "none", "none", "none", "none"];
+                arrMYnonColor[i] = tempMycolor;
+                setIniColor(arrMYnonColor[0], arrMYnonColor[1], arrMYnonColor[2], arrMYnonColor[3], arrMYnonColor[4], arrMYnonColor[5]);
+            }
+
+        }
+        //ランダムなカラー返す関数
+        function randColor() {
+            var rgb = '"rgb(' + Math.floor(Math.random() * (255 + 1)) + ',' + Math.floor(Math.random() * (255 + 1)) + ',' + Math.floor(Math.random() * (255 + 1)) + ')"';
+            rgb = colorRGBTo16(rgb);
+            return rgb;
+        }
+
+        $("#randomColor").on('click', function () {
+            setRandomColor();
+            //resetBTN表示
+            $('#btnResetAllWrap').show();
+        });
+
+        //読み込んだ時にコントローラーの色を配置しなおす
+
+        //プリセットカラーを選んだ時にカラー選択の色も入れかえるスクリプト
+        function setIniColor(c1, c2, c3, c4, c5, c6) {
+
+
+            var c1BoxColor = "000000";
+            var c2BoxColor = "000000";
+            var c3BoxColor = "000000";
+            var c4BoxColor = "000000";
+            var c5BoxColor = "000000";
+            var c6BoxColor = "000000";
+            if (c1 != "none") {
+                c1 = (c1.slice(1)).toUpperCase();
+                var c1RGB = color16ToRGB(c1);
+
+                var c1RGBSUM = c1RGB[0] + c1RGB[1] + c1RGB[2];
+                if (c1RGBSUM < 400) {
+                    c1BoxColor = "ffffff";
+                }
+                $('#color1').val(c1);
+                $('#color1').css('background-color', '#' + c1).css("color", "#" + c1BoxColor);
+
+            }
+            if (c2 != "none") {
+                c2 = (c2.slice(1)).toUpperCase();
+                var c2RGB = color16ToRGB(c2);
+                var c2RGBSUM = c2RGB[0] + c2RGB[1] + c2RGB[2];
+
+                if (c2RGBSUM < 400) {
+                    c2BoxColor = "ffffff";
+                }
+                $('#color2').val(c2);
+                $('#color2').css('background-color', '#' + c2).css("color", "#" + c2BoxColor);
+            }
+            if (c3 != "none") {
+                c3 = (c3.slice(1)).toUpperCase();;
+                var c3RGB = color16ToRGB(c3);
+                var c3RGBSUM = c3RGB[0] + c3RGB[1] + c3RGB[2];
+
+                if (c3RGBSUM < 400) {
+                    c3BoxColor = "ffffff";
+                }
+
+
+                $('#color3').val(c3);
+
+
+
+                $('#color3').css('background-color', '#' + c3).css("color", "#" + c3BoxColor);
+            }
+            if (c4 != "none") {
+                c4 = (c4.slice(1)).toUpperCase();
+                var c4RGB = color16ToRGB(c4);
+                var c4RGBSUM = c4RGB[0] + c4RGB[1] + c4RGB[2];
+
+                if (c4RGBSUM < 400) {
+                    c4BoxColor = "ffffff";
+                }
+                $('#color4').val(c4);
+                $('#color4').css('background-color', '#' + c4).css("color", "#" + c4BoxColor);
+            }
+            if (c5 != "none") {
+                c5 = (c5.slice(1)).toUpperCase();
+                var c5RGB = color16ToRGB(c5);
+                var c5RGBSUM = c5RGB[0] + c5RGB[1] + c5RGB[2];
+
+                if (c5RGBSUM < 400) {
+                    c5BoxColor = "ffffff";
+                }
+                $('#color5').val(c5);
+                $('#color5').css('background-color', '#' + c5).css("color", "#" + c5BoxColor);
+            }
+            if (c6 != "none") {
+                c6 = (c6.slice(1)).toUpperCase();
+                var c6RGB = color16ToRGB(c6);
+                var c6RGBSUM = c6RGB[0] + c6RGB[1] + c6RGB[2];
+
+                if (c6RGBSUM < 400) {
+                    c6BoxColor = "ffffff";
+                }
+                $('#color6').val(c6);
+                $('#color6').css('background-color', '#' + c6).css("color", "#" + c6BoxColor);
+            }
+        }
+        //16進数カラーをRGBに変換する関数
+        function color16ToRGB(hex) {
+            if (hex.slice(0, 1) == "#") hex = hex.slice(1);
+            if (hex.length == 3) hex = hex.slice(0, 1) + hex.slice(0, 1) + hex.slice(1, 2) + hex.slice(1, 2) + hex.slice(2, 3) + hex.slice(2, 3);
+
+            return [hex.slice(0, 2), hex.slice(2, 4), hex.slice(4, 6)].map(function (str) {
+                return parseInt(str, 16);
+            });
+        }
+
+        function resetColor() {
+
+            $(".st0").css('fill', '#000000');
+            $(".st0").css('stroke', '#' + $('#color3').val()).css('stroke-width', "0");
+            $('#color1').val('000000');
+            $('#color1').css('background-color', '#000000').css("color", "#ffffff");
+            vFlag = true;
+
+            //                $(".st0").css('fill', '#000000');
+            //                $(".st1").css('stroke', '#' + $('#color3').val()).css('stroke-width', "0");
+            //                $('#color1').val('FFFFFF');
+            //                $('#color1').css('background-color', '#ffffff').css("color", "#000000");
+            //                $(".st1").css('fill', '#ffffff');
+            //                $('#color2').val('000000');
+            //                $('#color2').css('background-color', '#000000').css("color", "#ffffff");
+            //                vFlag = true;
+
+        }
+
+
+        $('#reset').click(function () {
+            resetColor();
+            $('#lineSlider1').slider('value', 0);
+        });
+        $('#resetC1').click(function () {
+            if ($(".st1").css('fill') != null) {
+                var c2temp = colorRGBTo16($(".st1").css('fill'));
+            } else {
+                var c2temp = "none";
+            }
+            if ($(".st2").css('fill') != null) {
+                var c3temp = colorRGBTo16($(".st2").css('fill'));
+            } else {
+                var c3temp = "none";
+            }
+            if ($(".st3").css('fill') != null) {
+                var c4temp = colorRGBTo16($(".st3").css('fill'));
+            } else {
+                var c4temp = "none";
+            }
+            if ($(".st4").css('fill') != null) {
+                var c5temp = colorRGBTo16($(".st4").css('fill'));
+            } else {
+                var c5temp = "none";
+            }
+            if ($(".st5").css('fill') != null) {
+                var c6temp = colorRGBTo16($(".st5").css('fill'));
+            } else {
+                var c6temp = "none";
+            }
+            setIniColor(myColor1, c2temp, c3temp, c4temp, c5temp, c6temp);
+            $(".st0").css('fill', myColor1);
+            $('.st0').css('opacity', '1');
+            $('#eye1').css("text-indent", "-9999px");
+            eyeflag1 = true;
+
+        });
+        $('#resetC2').click(function () {
+
+            if ($(".st0").css('fill') != null) {
+                var c1temp = colorRGBTo16($(".st0").css('fill'));
+            } else {
+                var c1temp = "none";
+            }
+            if ($(".st1").css('fill') != null) {
+                var c2temp = colorRGBTo16($(".st1").css('fill'));
+            } else {
+                var c2temp = "none";
+            }
+            if ($(".st2").css('fill') != null) {
+                var c3temp = colorRGBTo16($(".st2").css('fill'));
+            } else {
+                var c3temp = "none";
+            }
+            if ($(".st3").css('fill') != null) {
+                var c4temp = colorRGBTo16($(".st3").css('fill'));
+            } else {
+                var c4temp = "none";
+            }
+            if ($(".st4").css('fill') != null) {
+                var c5temp = colorRGBTo16($(".st4").css('fill'));
+            } else {
+                var c5temp = "none";
+            }
+            if ($(".st5").css('fill') != null) {
+                var c6temp = colorRGBTo16($(".st5").css('fill'));
+            } else {
+                var c6temp = "none";
+            }
+            setIniColor(c1temp, myColor2, c3temp, c4temp, c5temp, c6temp);
+            $(".st1").css('fill', myColor2);
+            $('.st1').css('opacity', '1');
+            $('#eye2').css("text-indent", "-9999px");
+            eyeflag2 = true;
+
+        });
+        $('#resetC3').click(function () {
+
+            if ($(".st0").css('fill') != null) {
+                var c1temp = colorRGBTo16($(".st0").css('fill'));
+            } else {
+                var c1temp = "none";
+            }
+            if ($(".st1").css('fill') != null) {
+                var c2temp = colorRGBTo16($(".st1").css('fill'));
+            } else {
+                var c2temp = "none";
+            }
+            if ($(".st2").css('fill') != null) {
+                var c3temp = colorRGBTo16($(".st2").css('fill'));
+            } else {
+                var c3temp = "none";
+            }
+            if ($(".st3").css('fill') != null) {
+                var c4temp = colorRGBTo16($(".st3").css('fill'));
+            } else {
+                var c4temp = "none";
+            }
+            if ($(".st4").css('fill') != null) {
+                var c5temp = colorRGBTo16($(".st4").css('fill'));
+            } else {
+                var c5temp = "none";
+            }
+            if ($(".st5").css('fill') != null) {
+                var c6temp = colorRGBTo16($(".st5").css('fill'));
+            } else {
+                var c6temp = "none";
+            }
+            setIniColor(c1temp, c2temp, myColor3, c4temp, c5temp, c6temp);
+            $(".st2").css('fill', myColor3);
+            $('.st2').css('opacity', '1');
+            $('#eye3').css("text-indent", "-9999px");
+            eyeflag3 = true;
+
+        });
+        $('#resetC4').click(function () {
+
+            if ($(".st0").css('fill') != null) {
+                var c1temp = colorRGBTo16($(".st0").css('fill'));
+            } else {
+                var c1temp = "none";
+            }
+            if ($(".st1").css('fill') != null) {
+                var c2temp = colorRGBTo16($(".st1").css('fill'));
+            } else {
+                var c2temp = "none";
+            }
+            if ($(".st2").css('fill') != null) {
+                var c3temp = colorRGBTo16($(".st2").css('fill'));
+            } else {
+                var c3temp = "none";
+            }
+            if ($(".st3").css('fill') != null) {
+                var c4temp = colorRGBTo16($(".st3").css('fill'));
+            } else {
+                var c4temp = "none";
+            }
+            if ($(".st4").css('fill') != null) {
+                var c5temp = colorRGBTo16($(".st4").css('fill'));
+            } else {
+                var c5temp = "none";
+            }
+            if ($(".st5").css('fill') != null) {
+                var c6temp = colorRGBTo16($(".st5").css('fill'));
+            } else {
+                var c6temp = "none";
+            }
+            setIniColor(c1temp, c2temp, c3temp, myColor4, c5temp, c6temp);
+            $(".st3").css('fill', myColor4);
+            $('.st3').css('opacity', '1');
+            $('#eye4').css("text-indent", "-9999px");
+            eyeflag4 = true;
+
+        });
+        $('#resetC5').click(function () {
+
+            if ($(".st0").css('fill') != null) {
+                var c1temp = colorRGBTo16($(".st0").css('fill'));
+            } else {
+                var c1temp = "none";
+            }
+            if ($(".st1").css('fill') != null) {
+                var c2temp = colorRGBTo16($(".st1").css('fill'));
+            } else {
+                var c2temp = "none";
+            }
+            if ($(".st2").css('fill') != null) {
+                var c3temp = colorRGBTo16($(".st2").css('fill'));
+            } else {
+                var c3temp = "none";
+            }
+            if ($(".st3").css('fill') != null) {
+                var c4temp = colorRGBTo16($(".st3").css('fill'));
+            } else {
+                var c4temp = "none";
+            }
+            if ($(".st4").css('fill') != null) {
+                var c5temp = colorRGBTo16($(".st4").css('fill'));
+            } else {
+                var c5temp = "none";
+            }
+            if ($(".st5").css('fill') != null) {
+                var c6temp = colorRGBTo16($(".st5").css('fill'));
+            } else {
+                var c6temp = "none";
+            }
+            setIniColor(c1temp, c2temp, c3temp, c4temp, myColor5, c6temp);
+            $(".st4").css('fill', myColor5);
+            $('.st4').css('opacity', '1');
+            $('#eye5').css("text-indent", "-9999px");
+            eyeflag5 = true;
+
+        });
+        $('#resetC6').click(function () {
+
+            if ($(".st0").css('fill') != null) {
+                var c1temp = colorRGBTo16($(".st0").css('fill'));
+            } else {
+                var c1temp = "none";
+            }
+            if ($(".st1").css('fill') != null) {
+                var c2temp = colorRGBTo16($(".st1").css('fill'));
+            } else {
+                var c2temp = "none";
+            }
+            if ($(".st2").css('fill') != null) {
+                var c3temp = colorRGBTo16($(".st2").css('fill'));
+            } else {
+                var c3temp = "none";
+            }
+            if ($(".st3").css('fill') != null) {
+                var c4temp = colorRGBTo16($(".st3").css('fill'));
+            } else {
+                var c4temp = "none";
+            }
+            if ($(".st4").css('fill') != null) {
+                var c5temp = colorRGBTo16($(".st4").css('fill'));
+            } else {
+                var c5temp = "none";
+            }
+            if ($(".st5").css('fill') != null) {
+                var c6temp = colorRGBTo16($(".st5").css('fill'));
+            } else {
+                var c6temp = "none";
+            }
+            setIniColor(c1temp, c2temp, c3temp, c4temp, c5temp, myColor6);
+            $(".st5").css('fill', myColor6);
+            $('.st5').css('opacity', '1');
+            $('#eye6').css("text-indent", "-9999px");
+            eyeflag6 = true;
+
+        });
+        //目ボタンを押したときの挙動 透明度opacity0 to 1で切り替える
+        function eyeAllOpen() {
+            $('#eye1,#eye2,#eye3,#eye4,#eye5,#eye6').css("text-indent", "-9999px");
+            eyeflag1 = true;
+            eyeflag2 = true;
+            eyeflag3 = true;
+            eyeflag4 = true;
+            eyeflag5 = true;
+            eyeflag6 = true;
+        }
+
+        $('#eyeID1').click(function () {
+            if (eyeflag1) {
+                $('.st0').css('opacity', '0');
+                $('#eye1').css("text-indent", "0px");
+                eyeflag1 = false;
+            } else {
+                $('.st0').css('opacity', '1');
+                $('#eye1').css("text-indent", "-9999px");
+                eyeflag1 = true;
+            }
+        });
+        $('#eyeID2').click(function () {
+            if (eyeflag2) {
+                $('.st1').css('opacity', '0');
+                $('#eye2').css("text-indent", "0px");
+                eyeflag2 = false;
+            } else {
+                $('.st1').css('opacity', '1');
+                $('#eye2').css("text-indent", "-9999px");
+                eyeflag2 = true;
+            }
+        });
+        $('#eyeID3').click(function () {
+            if (eyeflag3) {
+                $('.st2').css('opacity', '0');
+                $('#eye3').css("text-indent", "0px");
+                eyeflag3 = false;
+            } else {
+                $('.st2').css('opacity', '1');
+                $('#eye3').css("text-indent", "-9999px");
+                eyeflag3 = true;
+            }
+        });
+        $('#eyeID4').click(function () {
+            if (eyeflag4) {
+                $('.st3').css('opacity', '0');
+                $('#eye4').css("text-indent", "0px");
+                eyeflag4 = false;
+            } else {
+                $('.st3').css('opacity', '1');
+                $('#eye4').css("text-indent", "-9999px");
+                eyeflag4 = true;
+            }
+        });
+        $('#eyeID5').click(function () {
+            if (eyeflag5) {
+                $('.st4').css('opacity', '0');
+                $('#eye5').css("text-indent", "0px");
+                eyeflag5 = false;
+            } else {
+                $('.st4').css('opacity', '1');
+                $('#eye5').css("text-indent", "-9999px");
+                eyeflag5 = true;
+            }
+        });
+        $('#eyeID6').click(function () {
+            if (eyeflag6) {
+                $('.st5').css('opacity', '0');
+                $('#eye6').css("text-indent", "0px");
+                eyeflag6 = false;
+            } else {
+                $('.st5').css('opacity', '1');
+                $('#eye6').css("text-indent", "-9999px");
+                eyeflag6 = true;
+            }
+        });
+        //枠線のボックス非表示
+        function wakuALLHide() {
+            $('#wakuBox1,#wakuBox2,#wakuBox3,#wakuBox4,#wakuBox5,#wakuBox6').hide();
+        }
+        //枠線の追加ボタンを押したとき
+        $('#addLine1').click(function () {
+            $('#wakuBox1').show();
+            $(this).hide();
+        });
+        $('#addLine2').click(function () {
+            $('#wakuBox2').show();
+            $(this).hide();
+        });
+        $('#addLine3').click(function () {
+            $('#wakuBox3').show();
+            $(this).hide();
+        });
+        $('#addLine4').click(function () {
+            $('#wakuBox4').show();
+            $(this).hide();
+        });
+        $('#addLine5').click(function () {
+            $('#wakuBox5').show();
+            $(this).hide();
+        });
+        $('#addLine6').click(function () {
+            $('#wakuBox6').show();
+            $(this).hide();
+        });
+        //枠線の削除ボタンを押したとき
+        $('#resetW1').click(function () {
+            $(".st0").css('stroke-width', "0");
+            $('#lineSlider1').slider("value", "0");
+            $('#wakuBox1').hide();
+            $('#addLine1').show();
+        });
+        $('#resetW2').click(function () {
+            $(".st1").css('stroke-width', "0");
+            $('#lineSlider2').slider("value", "0");
+            $('#wakuBox2').hide();
+            $('#addLine2').show();
+        });
+        $('#resetW3').click(function () {
+            $(".st2").css('stroke-width', "0");
+            $('#lineSlider3').slider("value", "0");
+            $('#wakuBox3').hide();
+            $('#addLine3').show();
+        });
+        $('#resetW4').click(function () {
+            $(".st3").css('stroke-width', "0");
+            $('#lineSlider4').slider("value", "0");
+            $('#wakuBox4').hide();
+            $('#addLine4').show();
+        });
+        $('#resetW5').click(function () {
+            $(".st4").css('stroke-width', "0");
+            $('#lineSlider5').slider("value", "0");
+            $('#wakuBox5').hide();
+            $('#addLine5').show();
+        });
+        $('#resetW6').click(function () {
+            $(".st5").css('stroke-width', "0");
+            $('#lineSlider6').slider("value", "0");
+            $('#wakuBox6').hide();
+            $('#addLine6').show();
+        });
+        //サムネイルクリックでSVGファイル切り替え
+        $('div#tnlist ul li').click(function () {
+            $('div#tnlist ul li').removeClass();
+            $(this).addClass('selected');
+            index = $(this).index();
+
+            resetColor();
+
+            iniDlName();
+            changeSvgfile(index);
+            changePath(); //ダウンロードパス変更
+        });
+
+        function changeSvgfile(variNum) {
+            //ローカル
+            $('#svg').load("/f/" + hinban + "/" + hinban + "_" + variNum + ".svg", function () {
+
+                getCssColor();
+                eyeAllOpen();
+                setDLformatPosition();
+            });
+            $('#svg').load("f/" + hinban + "/" + hinban + "_" + variNum + ".svg", function () {
+                getCssColor();
+                eyeAllOpen();
+                setDLformatPosition();
+            });
+
+        }
+
+
+        //文字の設定
+
+        //textAreaがチェンジしたら
+        $('#textareaTXT').keyup(function () {
+            allinsertTXT();
+            //resetBTN表示
+
+            $('#txtEditor').show();
+        });
+
+        //textAreaからフォーカスが外れた時にも
+        $('#textareaTXT').focusout(function (e) {
+            allinsertTXT();
+            //resetBTN表示
+            $('#txtEditor').show();
+        });
+
+        function allinsertTXT() {
+
+            var textareaTXT = $("#textareaTXT").val();
+            //クロスサイトスクリプティング防止でエスケープ
+            var escape = {
+                '<': '&lt;',
+                '>': '&gt;',
+                '&': '&amp;',
+                '"': '&quot;',
+                "'": '&#39;',
+                '`': '&#x60;'
+            };
+            var textareaTXT = textareaTXT.split("").map(function (x) {
+                return typeof escape[x] === "undefined" ? x : escape[x]
+            }).join("");
+            addSvgTXT(textareaTXT);
+        }
+
+        //svgにTXTを挿入するよ
+        function addSvgTXT(insertTXT) {
+            var myTXT = insertTXT;
+            myTXT = myTXT.replace(/！/g, '!');
+
+            var myTXTArr = myTXT.split(/\n/);
+            var tempTXTColor = $('#txtColor').val();
+            //////////////////  文字の初期設定  //////////
+            var fontSZ = $("#mojiScaleSlider").slider('value');
+            var myinsertTXTSTART = '<g font-family="noto"  id="svgTXT" font-size="' + fontSZ + '">';
+            var myinsertTXTLAST = "</g>";
+            if (txtYpos == undefined) {
+                txtYpos = 46;
+            }
+            var myinsertTXTIN = "";
+            var posKEISU1 = $("#mojiScaleSlider").slider('value') * 0.13;
+            console.log("txtoffsetは" + txtoffset);
+            var posKEISU2 = 10;
+            var myinsertTXTINYpos = txtYpos - posKEISU1 * 1.5 - posKEISU2 * (myTXTArr.length - 1);
+            if (txtXpos == undefined) {
+                txtXpos = 50
+            }
+            //
+
+            for (var i = 0; i < myTXTArr.length; i++) {
+                if (txtoffset == null) {
+                    txtoffset = 0.34;
+                }
+                myinsertTXTINYpos += $("#mojiScaleSlider").slider('value') * txtoffset;
+                myinsertTXTIN += '<text x="' + txtXpos + '%" y="' + myinsertTXTINYpos + '%" fill = "' + tempTXTColor + '"  text-anchor="middle" font-weight="bolder">' + myTXTArr[i] + '</text>';
+
+            }
+            $('#svgTXT').remove();
+
+            $("svg").append(myinsertTXTSTART + myinsertTXTIN + myinsertTXTLAST);
+            //描画できないためいったん空にした後再度カラー入れるんゴ
+            var tempSVGCode = $("#svg").html();
+            $("#svg").html("");
+            $("#svg").html(tempSVGCode);
+
+            $("#svgTXT text").css('fill', '#' + tempTXTColor);
+
+        }
+
+        //テキストのサイズを変更
+        function txtSizeChage(tsizeValue) {
+            var myLineHeight = 2 * tsizeValue;
+            $('#svgTXT text').css("font-size", tsizeValue);
+            allinsertTXT();
+
+        }
+        //文字の位置Xを変更
+        function txtXposChage(tXposValue) {
+            txtXpos = tXposValue;
+
+            allinsertTXT();
+        }
+        //文字の位置Yを変更
+        function txtYposChage(tYposValue) {
+            txtYpos = tYposValue;
+            allinsertTXT();
+
+        }
+        //行間の変更
+        function textoffsetChage(textoffsetValue) {
+            txtoffset = textoffsetValue;
+            allinsertTXT();
+
+        }
+        ////文字色の変更
+        $('#txtColor').change(function () {
+
+            $("#svgTXT text").css('fill', '#' + this.value);
+            resetBtnShow();
+            //resetBTN表示
+
+        });
+        //文字のリセット
+        $('#btnResetTxt').click(function () {
+            $('#svgTXT').remove();
+            $('#textareaTXT').val("");
+            $('#txtEditor').hide();
+        });
+
+        //文字の設定2
+
+        //textAreaがチェンジしたら
+        $('#textareaTXT2').keyup(function () {
+            allinsertTXT2();
+            //resetBTN表示
+
+            $('#txtEditor2').show();
+        });
+
+        //textAreaからフォーカスが外れた時にも
+        $('#textareaTXT2').focusout(function (e) {
+            allinsertTXT2();
+            //resetBTN表示
+            $('#txtEditor2').show();
+        });
+
+        function allinsertTXT2() {
+
+            var textareaTXT = $("#textareaTXT2").val();
+            //クロスサイトスクリプティング防止でエスケープ
+            var escape = {
+                '<': '&lt;',
+                '>': '&gt;',
+                '&': '&amp;',
+                '"': '&quot;',
+                "'": '&#39;',
+                '`': '&#x60;'
+            };
+            var textareaTXT = textareaTXT.split("").map(function (x) {
+                return typeof escape[x] === "undefined" ? x : escape[x]
+            }).join("");
+            addSvgTXT2(textareaTXT);
+        }
+        //svgにTXTを挿入するよその２
+        function addSvgTXT2(insertTXT) {
+            var myTXT = insertTXT;
+            myTXT = myTXT.replace(/！/g, '!');
+
+            var myTXTArr = myTXT.split(/\n/);
+            var tempTXTColor = $('#txtColor2').val();
+            //////////////////  文字の初期設定  //////////
+            var fontSZ2 = $("#mojiScaleSlider2").slider('value');
+            var myinsertTXTSTART = '<g font-family="noto"  id="svgTXT2" font-size="' + fontSZ2 + '">';
+            var myinsertTXTLAST = "</g>";
+            if (txtYpos2 == undefined) {
+                txtYpos2 = 52;
+            }
+            var myinsertTXTIN = "";
+            var posKEISU1 = $("#mojiScaleSlider2").slider('value') * 0.13;
+            console.log("txtoffset2は" + txtoffset2);
+            var posKEISU2 = 10;
+            var myinsertTXTINYpos = txtYpos2 - posKEISU1 * 1.5 - posKEISU2 * (myTXTArr.length - 1);
+            if (txtXpos2 == undefined) {
+                txtXpos2 = 50
+            }
+            //
+
+            for (var i = 0; i < myTXTArr.length; i++) {
+                if (txtoffset2 == null) {
+                    txtoffset2 = 0.34;
+                }
+                myinsertTXTINYpos += $("#mojiScaleSlider2").slider('value') * txtoffset2;
+                myinsertTXTIN += '<text x="' + txtXpos2 + '%" y="' + myinsertTXTINYpos + '%" fill = "' + tempTXTColor + '"  text-anchor="middle" font-weight="bolder">' + myTXTArr[i] + '</text>';
+
+            }
+            $('#svgTXT2').remove();
+
+            $("svg").append(myinsertTXTSTART + myinsertTXTIN + myinsertTXTLAST);
+            //描画できないためいったん空にした後再度カラー入れるんゴ
+            var tempSVGCode = $("#svg").html();
+            $("#svg").html("");
+            $("#svg").html(tempSVGCode);
+
+            $("#svgTXT2 text").css('fill', '#' + tempTXTColor);
+
+        }
+
+        //テキスト2のサイズを変更
+        function txtSizeChage2(tsizeValue) {
+            var myLineHeight = 2 * tsizeValue;
+            $('#svgTXT2 text').css("font-size", tsizeValue);
+            allinsertTXT2();
+
+        }
+        //文字2の位置Xを変更
+        function txtXposChage2(tXposValue) {
+            txtXpos2 = tXposValue;
+
+            allinsertTXT2();
+        }
+        //文字2の位置Yを変更
+        function txtYposChage2(tYposValue) {
+            txtYpos2 = tYposValue;
+            allinsertTXT2();
+
+        }
+        //行間の変更
+        function textoffsetChage2(textoffsetValue) {
+            txtoffset2 = textoffsetValue;
+            allinsertTXT2();
+
+        }
+        ////文字2色の変更
+        $('#txtColor2').change(function () {
+
+            $("#svgTXT2 text").css('fill', '#' + this.value);
+            resetBtnShow();
+            //resetBTN表示
+
+        });
+        //文字2のリセット
+        $('#btnResetTxt2').click(function () {
+            $('#svgTXT2').remove();
+            $('#textareaTXT2').val("");
+            $('#txtEditor2').hide();
+        });
+
+
+
+        //サイズ変更
+        function sizeChange(sizeValue) {
+            //            $("#svg,#imgBox,#bgcolor,svg").css("width", sizeValue + "px").css("height", sizeValue + "px");
+            $("#svg,#imgBox,#bgcolor,svg").css("width", sizeValue + "px");
+            if (Math.round($('#svg').height() == 0)) {
+                $('#sizeBox h3 span').text('横：' + sizeValue + "px");
+            } else {
+                $('#sizeBox h3 span').text('横：' + sizeValue + "px　縦：" + Math.round($('#svg').height()) + "px");
+            }
+            setDLformatPosition();
+        }
+
+        //IEサイズ変更
+        $("a.xs").click(function () {
+            sizeChange(100);
+            $("ul#size li a").removeClass("selected");
+            $(this).addClass("selected");
+            IEsize = "s100";
+            changePath(IEsize);
+        });
+        $("a.s").click(function () {
+            sizeChange(200);
+            $("ul#size li a").removeClass("selected");
+            $(this).addClass("selected");
+            IEsize = "s200";
+            changePath(IEsize);
+        });
+        $("a.m").click(function () {
+            sizeChange(300);
+            $("ul#size li a").removeClass("selected");
+            $(this).addClass("selected");
+            IEsize = "s300";
+            changePath(IEsize);
+        });
+        $("a.l").click(function () {
+            sizeChange(500);
+            $("ul#size li a").removeClass("selected");
+            $(this).addClass("selected");
+            IEsize = "s500";
+            changePath(IEsize);
+        });
+        $("a.ll").click(function () {
+            sizeChange(750);
+            $("ul#size li a").removeClass("selected");
+            $(this).addClass("selected");
+            IEsize = "s750";
+            changePath(IEsize);
+        });
+        $("a.xl").click(function () {
+            sizeChange(1200);
+            $("ul#size li a").removeClass("selected");
+            $(this).addClass("selected");
+            IEsize = "s1200";
+            changePath(IEsize);
+        });
+
+
+        //色1のライン太さ変更
+        function lineChange(lineValue) {
+            lineVal = lineValue;
+
+
+
+            if (vFlag) {
+                $(".st0").css('stroke', '#' + $('#wakuColor1').attr("value")).css('stroke-width', lineVal);
+            } else {
+                $(".st0").css('stroke', '#' + $('#wakuColor1').value).css('stroke-width', lineVal);
+            }
+        }
+
+        //色2のライン太さ変更
+        function lineChange2(lineValue) {
+            lineVal = lineValue;
+
+
+
+            if (vFlag) {
+                $(".st1").css('stroke', '#' + $('#wakuColor2').attr("value")).css('stroke-width', lineVal);
+            } else {
+                $(".st1").css('stroke', '#' + $('#wakuColor2').value).css('stroke-width', lineVal);
+            }
+
+
+        }
+
+        function lineChange3(lineValue) {
+            lineVal = lineValue;
+
+
+
+            if (vFlag) {
+                $(".st2").css('stroke', '#' + $('#wakuColor3').attr("value")).css('stroke-width', lineVal);
+            } else {
+                $(".st2").css('stroke', '#' + $('#wakuColor3').value).css('stroke-width', lineVal);
+            }
+
+        }
+
+        function lineChange4(lineValue) {
+            lineVal = lineValue;
+
+
+
+            if (vFlag) {
+                $(".st3").css('stroke', '#' + $('#wakuColor4').attr("value")).css('stroke-width', lineVal);
+            } else {
+                $(".st3").css('stroke', '#' + $('#wakuColor4').value).css('stroke-width', lineVal);
+            }
+
+        }
+
+        function lineChange5(lineValue) {
+            lineVal = lineValue;
+
+
+
+            if (vFlag) {
+                $(".st4").css('stroke', '#' + $('#wakuColor5').attr("value")).css('stroke-width', lineVal);
+            } else {
+                $(".st4").css('stroke', '#' + $('#wakuColor5').value).css('stroke-width', lineVal);
+            }
+
+        }
+
+        function lineChange6(lineValue) {
+            lineVal = lineValue;
+
+
+
+            if (vFlag) {
+                $(".st4").css('stroke', '#' + $('#wakuColor6').attr("value")).css('stroke-width', lineVal);
+            } else {
+                $(".st4").css('stroke', '#' + $('#wakuColor6').value).css('stroke-width', lineVal);
+            }
+
+        }
+        //カラーチェンジ
+
+        $('#color1').change(function () {
+
+
+            $(".st0").css('fill', '#' + this.value);
+
+            resetBtnShow();
+        });
+        $('#color2').change(function () {
+
+            $(".st1").css('fill', '#' + this.value);
+
+            resetBtnShow();
+        });
+        $('#color3').change(function () {
+
+            $(".st2").css('fill', '#' + this.value);
+
+            resetBtnShow();
+        });
+        $('#color4').change(function () {
+
+            $(".st3").css('fill', '#' + this.value);
+
+            resetBtnShow();
+        });
+        $('#color5').change(function () {
+
+            $(".st4").css('fill', '#' + this.value);
+
+            resetBtnShow();
+        });
+        $('#color6').change(function () {
+
+            $(".st5").css('fill', '#' + this.value);
+
+            resetBtnShow();
+        });
+        $('#wakuColor1').change(function () {
+            vFlag = false;
+            if (lineVal == null || lineVal == 0) {
+                lineVal = 5;
+                $('#lineSlider1').slider('value', 5);
+            }
+
+            $(".st0").css('stroke', '#' + this.value).css('stroke-width', lineVal);
+
+            resetBtnShow();
+        });
+        $('#wakuColor2').change(function () {
+            vFlag = false;
+            if (lineVal == null || lineVal == 0) {
+                lineVal = 5;
+                $('#lineSlider2').slider('value', 5);
+            }
+
+            $(".st1").css('stroke', '#' + this.value).css('stroke-width', lineVal);
+
+            resetBtnShow();
+        });
+        $('#wakuColor3').change(function () {
+            vFlag = false;
+            if (lineVal == null || lineVal == 0) {
+                lineVal = 5;
+                $('#lineSlider3').slider('value', 5);
+            }
+
+            $(".st2").css('stroke', '#' + this.value).css('stroke-width', lineVal);
+
+            resetBtnShow();
+        });
+        $('#wakuColor4').change(function () {
+            vFlag = false;
+            if (lineVal == null || lineVal == 0) {
+                lineVal = 5;
+                $('#lineSlider4').slider('value', 5);
+            }
+
+            $(".st3").css('stroke', '#' + this.value).css('stroke-width', lineVal);
+
+            resetBtnShow();
+        });
+        $('#wakuColor5').change(function () {
+            vFlag = false;
+            if (lineVal == null || lineVal == 0) {
+                lineVal = 5;
+                $('#lineSlider5').slider('value', 5);
+            }
+
+            $(".st4").css('stroke', '#' + this.value).css('stroke-width', lineVal);
+
+            resetBtnShow();
+        });
+        $('#wakuColor6').change(function () {
+            vFlag = false;
+            if (lineVal == null || lineVal == 0) {
+                lineVal = 5;
+                $('#lineSlider6').slider('value', 5);
+            }
+
+            $(".st5").css('stroke', '#' + this.value).css('stroke-width', lineVal);
+
+            resetBtnShow();
+        });
+        //モバイルとPCでコントローラの位置を変える
+        function spPcContPosChange() {
+            var myWinW2 = $(window).width();
+            if (myWinW2 > 601) {
+                $('#sizeBoxWrap').show().appendTo('#ulWrap');
+                $('#colorBox').show().appendTo('#ulWrap');
+                $('#textBoxWrap').show().appendTo('#ulWrap');
+                $('#textBoxWrap2').show().appendTo('#ulWrap');
+                $('#textBoxWrap3').show().appendTo('#ulWrap');
+            } else {
+
+                $('#sizeBoxWrap').hide().appendTo('#spEditcontrler');
+                $('#colorBox').hide().appendTo('#spEditcontrler');
+                $('#textBoxWrap').hide().appendTo('#spEditcontrler');
+                $('#textBoxWrap2').hide().appendTo('#spEditcontrler');
+                $('#textBoxWrap3').hide().appendTo('#spEditcontrler');
+            }
+
+        }
+        spPcContPosChange(); //初回発火
+        //ダウンロードボタンやバリエーションなどの各種情報を画像の下にする
+        function setDLformatPosition() {
+            var myWinW = $(window).width();
+
+            if (myWinW > 601) {
+                $('div#infoBox').css('position', 'absolute').css('left', '350px');
+
+                var dlHeight = $('#svg').height() + 20;
+                var imgWrapHeight = dlHeight + $('#infoBox').height() + 250;
+
+
+                $('div#infoBox').css('top', dlHeight + 'px');
+                $('div#imgWrap').css('height', imgWrapHeight + 'px');
+
+                //サムネイル一覧をulWrapのh1の下に移動
+                $('#tnlist').insertBefore('#formatBox');
+            } else {
+                $('div#infoBox').css('top', '0');
+                $('#tnlist').insertBefore('#ulWrap');
+            }
+
+        }
+
+        $('#bgcolor').change(function () {
+            alert(this.value);
+        });
+
+
+
+
+        //Download
+        $("ul#format li:nth-child(3) a").on('click', function () {
+
+            saveSvg();
+            return false;
+        });
+        $("ul#formatSP li:nth-child(3) a").on('click', function () {
+
+            saveSvg();
+            return false;
+        });
+        //IE向け
+        $("ul#downBtnIE li:nth-child(3) a").on('click', function () {
+
+            saveSvg();
+            return false;
+        });
+        $("ul#format li:nth-child(1) a").on('click', function () {
+            sizeChange($('#sizeSlider').slider("value"));
+
+            saveJpg();
+            return false;
+        });
+        $("ul#formatSP li:nth-child(1) a").on('click', function () {
+            sizeChange($('#sizeSlider').slider("value"));
+
+            saveJpg();
+            return false;
+        });
+        $("ul#format li:nth-child(2) a").on('click', function () {
+            sizeChange($('#sizeSlider').slider("value"));
+
+            savePng();
+            return false;
+        });
+        $("ul#formatSP li:nth-child(2) a").on('click', function () {
+            sizeChange($('#sizeSlider').slider("value"));
+
+            savePng();
+            return false;
+        });
+
+
+
+
+
+
+
+
+        //*PNG側のダウンロード作業です。
+
+        function savePng() {
+            //ボタンを押した時点での#svg内のhtmlと高さ、横幅を変数にいれといて、、
+            snap_height = $("#svg").height();
+            snap_width = $("#svg").width();
+            svgText = $("#svg").html();
+
+            //svgをcanvasにしますよ。
+
+            canvg();
+            html2canvas($("#svg"), {
+                onrendered: function (canvas) {
+                    document.getElementById("ss").href = canvas.toDataURL("image/png");
+                    document.getElementById("ss").click();
+                    again2();
+                }
+            });
+        }
+
+
+        //変数にいれといた要素を解凍します。高さ、横幅も再設定です。
+        function again2() {
+            $("#svg").empty();
+
+            $(function () {
+                setTimeout(function () {
+                    $("#svg").remove();
+                    //$("#again").prepend("<div id='graph02'>Hello</div>");
+                    $("#svg").after("<div id='svg'></div>");
+                    $("#svg").html(svgText);
+
+                    $("#svg").css({
+                        "height": snap_height,
+                        "width": snap_width
+                    })
+
+                }, 1000);
+            });
+
+
+
+        }
+
+
+
+
+        //jpg 保存
+        //*JPG側のダウンロード作業です。
+
+
+        function saveJpg() {
+
+
+            //ボタンを押した時点での#svg内のhtmlと高さ、横幅を変数にいれといて、、
+            snap_height = $("#svg").height();
+            snap_width = $("#svg").width();
+            svgText = $("#svg").html();
+
+            $("#svg").css("background", "#fff");
+
+            //svgをcanvasにしますよ。
+            canvg();
+            html2canvas($("#svg"), {
+                onrendered: function (canvas) {
+                    document.getElementById("jj").href = canvas.toDataURL("image/jpeg");
+
+                    document.getElementById("jj").click();
+
+                    $("#svg").css("background", "none");
+                    again2();
+
+                }
+            });
+        }
+
+        //変数にいれといた要素を解凍します。高さ、横幅も再設定です。
+        function again2() {
+            $("#svg").empty();
+
+            $(function () {
+                setTimeout(function () {
+                    $("#svg").remove();
+
+                    $("#again").after("<div id='svg'></div>");
+                    $("#svg").html(svgText);
+
+                    $("#svg").css({
+                        "height": snap_height,
+                        "width": snap_width
+                    })
+
+                }, 1000);
+            });
+
+
+
+        }
+        //リセットOFF
+        function resetBtnHide() {
+            $("#reset").hide();
+        }
+
+        function resetBtnShow() {
+            $("#reset").show();
+            $(this).hide();
+        }
+
+        //IEようにダウンロードバスを設定する
+        function changePath(dlSize) {
+
+            var srcTxt = "/f/" + hinban + "/" + hinban + "_" + index;
+            var srcTxtIMG = "/f/" + hinban + "/" + dlSize + "_" + hinban + "_" + index;
+
+            $("#downBtnIE li:nth-child(1) a").attr('href', srcTxtIMG + ".png");
+            $("#downBtnIE li:nth-child(2) a").attr('href', srcTxtIMG + ".jpg");
+
+
+            $("#downBtnIE li:nth-child(1) a").attr('download', srcTxtIMG + ".png");
+            $("#downBtnIE li:nth-child(2) a").attr('download', srcTxtIMG + ".jpg");
+
+            src02 = srcTxt.replace(/(\_16|\_32|\_48|\_64|\_128|\_256|\_512)/g, '');
+
+            //	$("#downBtnIE li:nth-child(3) a").attr('href',srcTxt+".svg");
+            //	$("#downBtnIE li:nth-child(3) a").attr('download',srcTxt+".svg");	
+
+        }
+        changePath("s500");
+
+        //バナーの位置移動
+        function setAdBanner() {
+            var singWinW = $(window).width();
+            var leftPos = singWinW / 2 + 620;
+            $("#adR").css("left", leftPos + "px");
+
+            //ついでにUIwrapを600以下で幅ピッタリにするんゴ
+            if (singWinW < 600) {
+                var ulWrap = singWinW - 40;
+                $('#ulWrap').css("width", ulWrap + "px");
+            } else {
+                $('#ulWrap').css("width", "300px");
+            }
+
+
+        }
+
+
+        setAdBanner(); //初回に発火
+
+
+        //モバイル編集メニューの挙動
+        $("#editMenu li:nth-child(2)").click(function () {
+            $('#sizeBoxWrap').slideToggle();
+            if ($('#colorBox').css("display") == 'block') {
+                $('#colorBox').slideToggle();
+            }
+            if ($('#textBoxWrap').css("display") == 'block') {
+                $('#textBoxWrap').slideToggle();
+            }
+            if ($('#bgInsertWrap').css("display") == 'block') {
+                $('#bgInsertWrap').slideToggle();
+            }
+            showMenuCloseBtn();
+            editScroll();
+        });
+        $("#editMenu li:nth-child(3)").click(function () {
+            $('#colorBox').slideToggle();
+            if ($('#sizeBoxWrap').css("display") == 'block') {
+                $('#sizeBoxWrap').slideToggle();
+            }
+            if ($('#textBoxWrap').css("display") == 'block') {
+                $('#textBoxWrap').slideToggle();
+            }
+            if ($('#bgInsertWrap').css("display") == 'block') {
+                $('#bgInsertWrap').slideToggle();
+            }
+            showMenuCloseBtn();
+            editScroll();
+        });
+        $("#editMenu li:nth-child(4)").click(function () {
+            $('#textBoxWrap').slideToggle();
+            if ($('#colorBox').css("display") == 'block') {
+                $('#colorBox').slideToggle();
+            }
+            if ($('#bgInsertWrap').css("display") == 'block') {
+                $('#bgInsertWrap').slideToggle();
+            }
+            if ($('#sizeBoxWrap').css("display") == 'block') {
+                $('#sizeBoxWrap').slideToggle();
+            }
+            showMenuCloseBtn();
+            editScroll();
+        });
+        $("#editMenu li:nth-child(5)").click(function () {
+            $('#bgInsertWrap').slideToggle();
+            if ($('#colorBox').css("display") == 'block') {
+                $('#colorBox').slideToggle();
+            }
+            if ($('#textBoxWrap').css("display") == 'block') {
+                $('#textBoxWrap').slideToggle();
+            }
+            if ($('#sizeBoxWrap').css("display") == 'block') {
+                $('#sizeBoxWrap').slideToggle();
+            }
+            showMenuCloseBtn();
+            editScroll();
+        });
+        //エディットメニュー閉じる
+        $('div#btn_menuClose').click(function () {
+            $('#sizeBoxWrap').slideUp();
+            $('#textBoxWrap').slideUp();
+            $('#colorBox').slideUp();
+            $('#bgInsertWrap').slideUp();
+            $(this).hide();
+        });
+        //エディットメニューオープンしたら閉じるボタン表示
+        function showMenuCloseBtn() {
+            if ($('#sizeBoxWrap').css("display") == 'none' &&
+                $('#textBoxWrap').css("display") == 'none' &&
+                $('#colorBox').css("display") == 'none' &&
+                $('#bgInsertWrap').css("display") == 'none') {
+                $('div#btn_menuClose').hide();
+            } else {
+                $('div#btn_menuClose').show();
+            }
+        }
+
+        function editScroll() {
+            let myWindowWidth = $(window).width();
+
+            let myscroll = $('imgWrap').scrollTop() + "px"
+            if (myWindowWidth < 600) {
+                $('html,body').animate({
+                    scrollTop: "318px"
+                }, 'slow', 'swing');
+            }
+        }
+
+
+        //リサイズした時の挙動
+        $(window).resize(function () {
+
+            setAdBanner();
+            setDLformatPosition();
+
+            spPcContPosChange();
+        });
+    });
+
+
+    //download属性効かない問題対処 IEだけ　Edgeは回避
+    if (userAgent.indexOf('msie') != -1 || userAgent.indexOf('trident') != -1) {
+
+
+        if (document.documentMode && navigator.msSaveOrOpenBlob) {
+            window.addEventListener("click", function (eve) {
+                var a = eve.target;
+                if (!a.hasAttribute("download")) return;
+                eve.preventDefault();
+                var filename = a.getAttribute("download");
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", a.href);
+                xhr.responseType = "blob";
+                xhr.send();
+                xhr.onload = function () {
+                    navigator.msSaveOrOpenBlob(xhr.response, filename);
+                }
+            })
+        }
+
+    }
+
+
+    // ■■Download　ポップアップ
+    var sec = 9; //初期値を7秒にする。
+    var fileType = "";
+    var newscroll = 0;
+    jQuery(function ($) {
+
+        //illustrator Ai ボタンをクリック
+        $("#aieps li").click(function () {
+            $("#waitIMG").attr('src', '/img/wait1.png');
+            fileType = "ai";
+            newscroll = $(window).scrollTop(); //スクロールの高さ取得
+            $("#fileDown").css("top", newscroll + "px");
+            $("#fileDownCover,#fileDown").show();
+
+            $("#dlBtnboxBtn a").text("illustrator Ai");
+            cdTimer();
+            return false;
+        });
+
+
+
+        //閉じる
+        $("#fileDownCover,#fileDownClose").click(function () {
+            $("#dlBtnbox p").show();
+            $("#dlBtnbox p span").html("5");
+            sec = 4;
+            $("#dlBtnboxBtn").hide();
+            $("#fileDownCover").hide();
+            $("#fileDown").hide();
+        });
+
+        function cdTimer() {
+            dltimer = setInterval(function () {
+                // 実行される処理
+                if (sec > 0) {
+                    sec = sec - 1;
+                    $("div#dlBtnbox p span").html(sec);
+                } else {
+                    clearInterval(dltimer);
+                    $("#dlBtnbox p").hide();
+                    $("#dlBtnboxBtn").show();
+                    $("#dlBtnboxBtn a").attr('href', '/f/' + hinban + '/' + hinban + '.zip')
+                }
+            }, 1200);
+        }
+    });

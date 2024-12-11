@@ -1,0 +1,81 @@
+@import url(common.css);
+main {
+  background-image: url(../img/TOPpage/modan.png);
+  background-blend-mode: luminosity;
+  font-size: 20px;
+}
+
+main h2 {
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
+
+.h3_border {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* 背景色にグラデーションを指定 */
+/* テキストで切り抜く */
+h3 {
+  font-size: 26px;
+  background: linear-gradient(90deg, #2f3437, #b15a4b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* 切り抜いた部分は背景を表示 */
+  border-top: 2px solid;
+  border-image: linear-gradient(90deg, #2f3437, #b15a4b) 1;
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 23px;
+  padding-bottom: 16px;
+}
+p.guide {
+  font-size: 20px;
+  background: linear-gradient(50deg, #2f3437, #b15a4b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 0 10px 60px;
+}
+
+div.yohaku {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 60px;
+}
+
+div.yohaku .group {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px 10px;
+  background-color: #f3f1ed;
+  border: 1px solid #a79e9c;
+}
+
+div.yohaku h4 {
+  font-size: 22px;
+  padding-bottom: 15px;
+}
+
+div.yohaku .tx_text p {
+  font-size: 17px;
+  padding-bottom: 5px;
+}
+
+/* ホームボタン */
+.homelink a {
+  font-size: 21px;
+  color: #fff6f6;
+  background-color: #9c3131;
+  width: fit-content;
+  padding: 17px 79px;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+}
+
+div.bottom {
+  padding-bottom: 110px;
+}

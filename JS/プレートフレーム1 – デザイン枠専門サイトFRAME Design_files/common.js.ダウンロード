@@ -1,0 +1,67 @@
+jQuery(function ($) {
+
+
+
+    //pagetop
+    $("#pageTop").click(function () {
+        $('html,body').animate({
+            scrollTop: "0px"
+        }, 'slow', 'swing');
+        return false;
+
+    });
+
+    //mobileのグローバルメニュー閉じる
+    $('#btnSPclose').on('click', function () {
+        $(this).parent().removeClass();
+    });
+    //mobileのグローバルメニュー閉じる
+    $('#btnMenu').on('click', function () {
+        $('#globalFmNavSP').addClass("showMenu");
+    });
+
+
+
+
+});
+
+
+//LINEスタンプADを表示する
+
+$(function () {
+
+    showLineMyAd();
+
+    function showLineMyAd() {
+        var myWinW = $(window).width();
+        if (myWinW < 600) {
+            $('#adstamp').appendTo('#contents');
+        }
+        //0-11までのランダムを発生
+        var randLine = Math.floor(Math.random() * 18);
+        var stampW = 160;
+        var stampLpos = -160 * randLine;
+        $('#adstamp li:nth-child(2) a').css('background-position', stampLpos + 'px');
+    }
+
+});
+
+//MYSITEを表示する
+$(function () {
+
+    showMySite();
+
+    function showMySite() {
+        var siteURL = ['https://fukidesign.com/', 'http://bg-patterns.com/', 'http://event-pre.com/', 'http://pictogram2.com/', 'http://da-lace.com/', 'http://www.chojugiga.com/', 'http://town-illust.com/', 'http://ribbon-freaks.com/', 'https://icooon-mono.com/', 'https://homejaws.com/'];
+        var siteLead = ['フキダシ専門サイト。フキダシ素材を探すならココ。', 'デザインパターンをお探しならBG-patterns', 'クリスマス、ハロウィンなどのイベント向け素材保管場所', '非常口でおなじみのピクトさん素材が沢山あります。', 'エレガントなレース素材の専門サイトです。', '平安のマンガこと鳥獣戯画のベクター素材サイト。', '街や建物のイラスト専門サイトです。', 'リボン素材ばかりたくさんつくったので置いておきます。', 'ひたすらアイコン素材を補完するサイトです。', 'ほめる力とデザイン力を高めるギャラリーサイト'];
+        //0-11までのランダムを発生
+        var randSite = Math.floor(Math.random() * 10);
+
+        var mysiteW = 170;
+        var mysiteLpos = -170 * randSite;
+        $('#mysite a').css('background-position', mysiteLpos + 'px');
+        $('#mysite a').attr('href', siteURL[randSite]);
+        $('#authorReco p').text(siteLead[randSite]);
+    }
+
+});

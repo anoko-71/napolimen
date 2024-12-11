@@ -1,0 +1,96 @@
+@import url(common.css);
+
+main {
+  background-image: url(../img/TOPpage/modan.png);
+  background-blend-mode: luminosity;
+}
+
+h2 {
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
+
+/* 左右余白 */
+.h3_border {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h3 {
+  font-family: Elsie;
+  font-size: 35px;
+  background: linear-gradient(90deg, #2f3437, #b15a4b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* グラデ線 */
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 2px solid;
+  border-image: linear-gradient(90deg, #2f3437, #b15a4b) 1;
+  padding-top: 23px;
+  padding-bottom: 58px;
+}
+
+/* GOODS内容 */
+div.goodslist div.goods_item a {
+  color: inherit;
+  text-decoration: none;
+}
+
+div.goodslist {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 48px;
+  padding-right: 47px;
+  padding-bottom: 130px;
+  gap: 50px 15px;
+}
+
+div.goodslist div.goods_item {
+  flex-basis: 250px;
+  margin: 0 auto;
+}
+
+div.goods_item h4 {
+  color: #453c3c;
+}
+
+/* グッズごとの高さ調整 */
+
+div.goods_item img {
+  padding-bottom: 5px;
+}
+div.goods_item h4 {
+  padding-bottom: 3px;
+}
+div.goods_item p.price {
+  color: #8e8e8e;
+  padding-bottom: 5px;
+}
+
+/* SOULD OUT */
+/* 下余白仮で15px タイトル１列、２列でかわってしまう */
+div.goods_item p.caution {
+  color: #d46565;
+  border: 1px solid #d46565;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3px 15px;
+  margin-bottom: 15px;
+}
+
+/* 拡大ホバー */
+div.goods_item img:hover {
+  transform: scale(1.1);
+}
+div.goods_item img {
+  transition: all 0.5s ease-in-out;
+}
+
+@media (max-width: 575px) {
+  div.goodslist {
+    display: inline;
+  }
+}

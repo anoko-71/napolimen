@@ -1,0 +1,241 @@
+@import url("https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Elsie&display=swap");
+
+body {
+  color: #2f3437;
+  font-size: 13px;
+  font-family: "Sawarabi Mincho", serif;
+  background-color: #fbfcef;
+  text-align: center;
+}
+/* リンクの青紫色と下線非表示 */
+/* a {
+  color: inherit;
+  text-decoration: none;
+} */
+
+/* モダンパターン付き背景色はsection.member */
+/* 内容はコンテナ幅に収めるため、それぞれdiv.containerをつける */
+.container {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header {
+  background-color: rgba(251, 252, 239, 0.9);
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+header div.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header div.container h1 {
+  padding-left: 15px;
+}
+
+/* ハンバーガーメニュー */
+.hmenu {
+  width: 48px;
+  height: 32px;
+  /* <button>は初期設定でボーダーや背景色があるので、無効化させる */
+  border: none;
+  background: transparent;
+  /* ↓ 575px以下(モバイル表示)で表示させるので、まずはハンバーガーメニュー非表示 */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  /* ハンバーガーメニュー全体の配置を設定 ブラウザ基準(デフォ)でいいので基準設定はしない */
+  /* <span>を中央に持ってくるためflexboxで<button>を親にする */
+  position: absolute;
+  right: 10px;
+}
+
+/* 幅:35px, 高さ:4px, 背景色:#fff, 角丸:4px, ブロック表示, 配置:absolute, 切り替え:0.5s */
+/* <span>はインラインなので書式表示されない → display:block; */
+/* .hmenu spanはハンバーガーの真ん中の線 */
+.hmenu span,
+.hmenu span::before,
+.hmenu span::after {
+  width: 35px;
+  height: 2px;
+  background-color: #691515;
+  border-radius: 2px;
+  display: block;
+  position: absolute;
+  /* ↓ ゆっくり三本線が☓になる(その逆も自動再生) */
+  transition: 0.5s;
+}
+
+/* ハンバーガーの上下の線 */
+/* 内容:"", 下:12px すべての線重なっているため、span(真ん中)を基準に12pxの位置*/
+.hmenu span::before {
+  content: "";
+  bottom: 8px;
+}
+
+/* 内容:"", 上:12px */
+.hmenu span::after {
+  content: "";
+  top: 8px;
+}
+
+/* ハンバーガーメニュー☓のパターン */
+/* 背景色:unset */
+/* 真ん中の線を非表示にする */
+.hmenu.close span {
+  background-color: unset;
+}
+
+/* 下:0, 回転:-45° */
+/* bottomで元の真ん中の位置に戻す */
+.hmenu.close span::before {
+  bottom: 0;
+  transform: rotate(-35deg);
+}
+
+/* 上:0, 回転:45° */
+.hmenu.close span::after {
+  top: 0;
+  transform: rotate(35deg);
+}
+
+/* ハンバーガーメニューここまで */
+nav {
+  z-index: 1;
+  /* background-color: rgba(251, 252, 239, 0.9); */
+}
+
+nav ul {
+  font-size: 17px;
+  display: flex;
+  gap: 13px;
+  padding-right: 30px;
+}
+
+/* リンクの装飾下線非表示・色設定解除 */
+nav ul li a {
+  text-decoration: none;
+  color: unset;
+}
+
+nav ul li a:hover {
+  color: #43766c;
+}
+
+/* フッダー */
+footer {
+  background-color: #691515;
+  color: #fff;
+}
+/* リンクリスト */
+footer aside ul {
+  padding-right: 35px;
+  padding-top: 30px;
+  padding-bottom: 12px;
+  display: flex;
+  justify-content: right;
+  column-gap: 50px;
+}
+/* サポートメニュー */
+footer ul.supportmenu {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-between;
+  gap: 10px 37px;
+  width: 41.5%;
+  justify-content: flex-start;
+  margin: 0 auto 30px;
+}
+footer ul.supportmenu li {
+  font-size: 17px;
+}
+
+footer ul.supportmenu li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+footer div.container {
+  position: relative;
+}
+
+footer p.icon {
+  position: absolute;
+  left: 30px;
+  bottom: 25px;
+}
+footer p.copyright {
+  padding-bottom: 25px;
+}
+p.demo a {
+  transition-delay: 0.5s;
+}
+
+@media (max-width: 575px) {
+  /* ヘッダー */
+  nav {
+    width: 0px;
+    height: calc(100% - 32.9px);
+    border: none;
+    position: fixed;
+    top: 32.9px;
+    right: 0;
+    transition: 0.5s;
+    overflow-x: hidden;
+    background-color: rgba(251, 252, 239, 0.9);
+  }
+
+  nav ul {
+    display: block;
+    width: 100vw;
+    padding-top: 30px;
+    padding-left: 20px;
+  }
+
+  .hmenu.close + nav {
+    width: 100vw;
+  }
+
+  nav li {
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 20px;
+  }
+
+  /* ハンバーガーメニュー */
+  .hmenu {
+    display: flex;
+  }
+  header div.container h1 {
+    width: 100px;
+  }
+
+  /* フッター */
+  footer aside ul img {
+    height: 45px;
+  }
+
+  footer aside ul {
+    padding-right: 20px;
+    padding-bottom: 12px;
+    column-gap: 10px;
+  }
+  footer ul.supportmenu {
+    flex-flow: column-reverse;
+    text-align: left;
+    width: 60%;
+    margin-left: 5%;
+    margin-bottom: 90px;
+  }
+  footer p.icon {
+    left: 16px;
+    bottom: 44px;
+  }
+}

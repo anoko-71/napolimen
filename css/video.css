@@ -1,0 +1,123 @@
+@import url(common.css);
+
+main {
+  background-image: url(../img/TOPpage/modan.png);
+  background-blend-mode: luminosity;
+}
+
+main section {
+  margin: 0 10px;
+}
+main h2 {
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
+main h3 {
+  text-align: left;
+  font-size: min(6vw, 26px);
+  background: linear-gradient(10deg, #b15a4b, #2f3437);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ここから始まる男たち */
+main h3.begin::after {
+  content: "";
+  display: block;
+  width: 660px;
+  border-bottom: 3px solid;
+  border-image: linear-gradient(230deg, #fbfcef, #b15a4b) 1;
+  margin-left: 390px;
+  margin-top: -5px;
+}
+figure.no1 {
+  display: flex;
+  margin: 40px 0;
+  width: fit-content;
+  margin: 40px auto;
+}
+
+.no1 figcaption dl {
+  background-color: #e0e9e3;
+  padding: 36px;
+  margin-left: 20px;
+}
+.no1 figcaption dl dt {
+  font-size: 17px;
+  padding-bottom: 20px;
+}
+.no1 figcaption dl dd {
+  font-size: 16px;
+  max-width: 440px;
+  text-align: left;
+  line-height: 1.7;
+}
+
+/* youtubeサイズ */
+iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  height: auto;
+  width: 350px;
+}
+
+/* シリーズおすすめ */
+div.osusume figcaption {
+  font-size: 14px;
+  padding-top: 10px;
+  width: 350px;
+}
+div.osusume {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 50px;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 80px;
+}
+div.osusume figure {
+  max-width: 350px;
+}
+h3.series {
+  padding-bottom: 40px;
+}
+main h3.series::after {
+  content: "";
+  display: block;
+  width: 800px;
+  border-bottom: 3px solid;
+  border-image: linear-gradient(230deg, #fbfcef, #b15a4b) 1;
+  margin-left: 255px;
+  margin-top: -5px;
+}
+@media (max-width: 767px) {
+  /* ここから始まる1列に戻す */
+  figure.no1 {
+    display: block;
+  }
+  .no1 figcaption dl {
+    background-color: #e0e9e3;
+    padding: 36px;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  /* おすすめシリーズ１列に戻す */
+  div.osusume {
+    display: block;
+    max-width: fit-content;
+  }
+  div.osusume figure {
+    padding-bottom: 20px;
+  }
+}
+@media (max-width: 575px) {
+  /* 見出しのボーダー削除 */
+  main h3.begin::after {
+    display: inline;
+  }
+  main h3.series::after {
+    display: inline;
+  }
+}

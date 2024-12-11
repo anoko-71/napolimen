@@ -1,0 +1,285 @@
+@import url(common.css);
+
+main {
+  background-image: url(../img/TOPpage/modan.png);
+  background-blend-mode: luminosity;
+}
+
+main h2 {
+  padding-top: 80px;
+  padding-bottom: 20px;
+}
+
+p.separator {
+  padding-bottom: 40px;
+}
+
+/* メンバー説明内容 */
+/* 画像の親設定 */
+section.profile div.frame {
+  position: relative;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 画像たちの配置・サイズ可変設定 */
+img.nametag {
+  position: absolute;
+  top: 17%;
+  right: 20%;
+  z-index: 2;
+  max-width: 418px;
+  width: 35vw;
+}
+
+img.rantan_card {
+  position: absolute;
+  top: 16%;
+  left: 10%;
+  z-index: 3;
+  max-width: 330px;
+  width: 30vw;
+  height: auto;
+  object-fit: cover;
+}
+
+img.frame2 {
+  position: absolute;
+  top: 27%;
+  right: 10%;
+  max-width: 630px;
+  height: auto;
+  width: 55vw;
+}
+
+/* モバイル表示用画像を非表示 */
+img.frame_mobile {
+  display: none;
+}
+img.rantan_card_mobile {
+  display: none;
+}
+img.frame2_mobile {
+  display: none;
+}
+img.nametag_mobile {
+  display: none;
+}
+
+/* X/youtubeリンク */
+a.Xlink {
+  position: absolute;
+  right: 26%;
+  bottom: 13%;
+}
+.Xlink img {
+  max-width: 68px;
+  width: 7vw;
+}
+
+a.youtubelink {
+  position: absolute;
+  right: 18%;
+  bottom: 13%;
+  max-width: 68px;
+}
+.youtubelink img {
+  max-width: 68px;
+  width: 7vw;
+}
+
+/* メンバー選択 */
+.select_yohaku {
+  position: relative;
+  padding: 134px 0px 134px;
+  /* padding-bottom: 400px; */
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
+  background-image: url(../img/MEMBERpage/cardback.png);
+  background-repeat: no-repeat;
+  max-width: 1040px;
+  padding-top: 134px;
+  padding-left: 15px;
+  background-position: center;
+  background-size: contain;
+}
+section.select {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/* 最初はすべて中央配置かつ重なるのでpositionつけた */
+.select_yohaku a {
+  display: block;
+  position: absolute;
+  /* .selectの中左半分余白を％で記述。 50だとなんか真ん中じゃなかった */
+  left: 48%;
+  top: 44px;
+  /* カード最初の配置 */
+  transform: translate(-50%, 0);
+  /* カード広がる時間・遅延で表示時間を(じゃないとすぐ開いてしまう) */
+  transition: 1s;
+  transition-delay: 0.3s;
+}
+
+/* jsプログラムで.cardbox見えた時に.hyoujiを追加させ、カードが広がるアニメーションをつける */
+.select_yohaku div.hyouji a.rantan {
+  margin-left: -150px;
+}
+.select_yohaku div.hyouji a.sugiru {
+  margin-left: -50px;
+}
+.select_yohaku div.hyouji a.hacchi {
+  margin-left: 50px;
+}
+.select_yohaku div.hyouji a.shu3 {
+  margin-left: 150px;
+}
+/* ミニカードサイズの可変 */
+.cardbox img {
+  max-width: 130px;
+  width: 20vw;
+}
+
+.select_yohaku a:hover {
+  transform: translate(-50%, -30px);
+  transition: 0.5s;
+}
+
+/* カード自動回転 */
+.profile img.rantan_card {
+  animation: turn 1.5s;
+}
+
+@keyframes turn {
+  to {
+    /* Y軸に対して１回転させる */
+    transform: rotateY(1turn);
+  }
+}
+/* カードホバー回転 */
+.profile img.rantan_card:hover {
+  transition: transform 1.5s;
+  transform: rotateY(360deg);
+}
+
+@media (max-width: 767px) {
+  .select_yohaku {
+    background-image: url(../img/MEMBERpage/cardback2.png);
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 575px) {
+  /* モバイル用画像を表示 */
+  img.frame_mobile {
+    display: block;
+  }
+  img.rantan_card_mobile {
+    display: block;
+  }
+  img.frame2_mobile {
+    display: block;
+  }
+  img.nametag_mobile {
+    display: block;
+  }
+  /* PC~タブレット・スマホ横用画像を非表示 */
+  img.frame {
+    display: none;
+  }
+  img.rantan_card {
+    display: none;
+  }
+  img.frame2 {
+    display: none;
+  }
+  img.nametag {
+    display: none;
+  }
+
+  /* 画像の親設定 */
+  section.profile div.frame {
+    position: relative;
+    max-width: 361px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* 画像たちの配置・サイズ可変設定 */
+  img.nametag_mobile {
+    position: absolute;
+    top: 40%;
+    right: 13%;
+    z-index: 2;
+    max-width: 418px;
+    width: 75%;
+  }
+
+  img.rantan_card_mobile {
+    position: absolute;
+    top: 13%;
+    left: 23%;
+    z-index: 2;
+    max-width: 190px;
+    width: 53vw;
+    height: auto;
+    object-fit: cover;
+  }
+
+  img.frame2_mobile {
+    position: absolute;
+    top: 58%;
+    right: 6%;
+    max-width: 630px;
+    height: auto;
+    width: 88%;
+  }
+  /* X/youtubeリンク モバイル表示 */
+  a.Xlink {
+    right: 37%;
+    bottom: 12%;
+  }
+  .Xlink img {
+    max-width: 68px;
+    width: 11vw;
+    min-width: 55px;
+  }
+
+  a.youtubelink {
+    right: 18%;
+    bottom: 12%;
+    max-width: 68px;
+  }
+  .youtubelink img {
+    max-width: 68px;
+    width: 11vw;
+    min-width: 55px;
+  }
+
+  /* jsプログラムで.cardbox見えた時に.hyoujiを追加させ、カードが広がるアニメーションをつける */
+  .select_yohaku div.hyouji a.rantan {
+    margin-left: -100px;
+  }
+  .select_yohaku div.hyouji a.sugiru {
+    margin-left: -30px;
+  }
+  .select_yohaku div.hyouji a.hacchi {
+    margin-left: 30px;
+  }
+  .select_yohaku div.hyouji a.shu3 {
+    margin-left: 100px;
+  }
+  /* ミニカードの配置 */
+  .select_yohaku a {
+    left: 48%;
+    top: 25%;
+  }
+}

@@ -1,0 +1,1051 @@
+div#imgWrap {
+    padding: 5px;
+}
+
+div#imgWrap h1 {
+
+    padding: 0px 10px 0px;
+    margin-bottom: 15px;
+    line-height: 2em;
+    border-left: 10px solid #eee;
+    font-size: 0.85em;
+}
+
+div#imgWrap h1 span:first-child:after {
+    border-right: 2px solid #eee;
+    height: 100%;
+    content: " ";
+    padding-left: 15px;
+
+}
+
+div#imgWrap h1 span:last-child {
+    padding-left: 15px;
+
+}
+
+div#imgWrap h3 {
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+div#imgBox {
+    margin-right: 35px;
+    background: url(../img/bg_imgmain.png);
+    margin-bottom: 30px;
+}
+
+img,
+svg {
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+section#ulWrap {
+    padding: 0px;
+    padding: 15px;
+    background: #fff;
+}
+
+div#sizeBox {
+    /*
+    max-width:490px;
+    width:40%;
+*/
+    margin-bottom: 40px;
+
+}
+
+ul#size {
+    display: none
+}
+
+ul#size li {
+    float: left;
+    width: 16%;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #000;
+    border-right: none;
+    text-align: center;
+}
+
+ul#size li:last-child {
+    border-right: 1px solid #000;
+}
+
+ul#size li a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+}
+
+ul#size li a.selected {
+    background: #eee;
+}
+
+div#colorBox {
+    max-width: 490px;
+    position: relative;
+}
+
+button#reset {
+    position: absolute;
+    top: -10px;
+    right: 0;
+    font-size: 12px;
+}
+
+ul#colors {}
+
+div#imgWrap ul#colors > li {
+    margin-bottom: 10px;
+    height: 42px;
+    display: inline-flex;
+    padding-bottom: 15px;
+}
+
+div#imgWrap ul#colors > li label {
+    line-height: 42px;
+    display: inline-block;
+    width: 60px;
+    font-size: 12px;
+    height: 42px;
+}
+
+div#imgWrap ul#colors input {
+    border: none;
+    width: 60px;
+    padding: 10px;
+    line-height: 30px;
+    display: inline-block;
+    border: 1px solid #eee;
+    text-align: center;
+    position: relative;
+    height: 22px;
+}
+
+div#imgWrap ul#colors > li:nth-child(4) {
+    display: block;
+    position: relative;
+}
+
+div#imgWrap ul#colors > li:nth-child(4) div {
+    width: 200px;
+    position: absolute;
+    top: 12px;
+    left: 80px;
+    display: block;
+}
+
+#colorBox1,
+#colorBox2,
+#colorBox3,
+#colorBox4,
+#colorBox5,
+#colorBox6 {
+    margin-bottom: 0px;
+}
+
+#textBoxWrap {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#textBoxWrap2 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#textBoxWrap3 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.wakubox {
+    background: #f2f2f2;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+}
+
+div#txtEditor div {
+    margin-bottom: 6px;
+}
+
+ul.colorIn,
+ul.colorWakuIn,
+ul.colorTxtIn {
+    width: 100%;
+    padding-bottom: 8px;
+
+}
+
+
+
+ul.colorIn li,
+ul.colorWakuIn li {
+    display: inline-block;
+    width: 15%;
+    font-size: 12px;
+    line-height: 36px;
+    text-align: center;
+    padding: 0;
+}
+
+ul.colorIn li:nth-child(1) {
+    width: 7%;
+}
+
+ul.colorWakuIn li:nth-child(1) {
+    width: 12%;
+    text-align: left;
+}
+
+ul.colorIn li:nth-child(2),
+ul.colorWakuIn li:nth-child(2) {
+    width: 35%;
+}
+
+ul.colorIn li:nth-child(3) {
+    width: 15%;
+    background: url(../img/bg_eye.png) no-repeat center center;
+}
+
+ul.colorIn li:nth-child(4) {
+    width: 24%;
+}
+
+ul.colorWakuIn li:nth-child(3) {
+    width: 40%;
+    text-align: right;
+}
+
+ul.colorTxtIn li {
+    display: inline-block;
+    width: 25%;
+    text-align: left;
+}
+
+ul.colorTxtIn li:nth-child(2) {
+    width: 40%;
+}
+
+ul.colorIn input,
+ul.colorWakuIn input,
+ul.colorTxtIn input {
+    border: none;
+    width: 80px;
+    padding: 6px;
+    line-height: 28px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    text-align: center;
+    position: relative;
+    height: 22px;
+}
+
+.wakubox label {
+    font-size: 12px;
+    height: 25px;
+}
+
+.btnMB {
+    display: block;
+    margin-top: -15px;
+    margin-left: auto;
+    margin-right: 0;
+    width: 80px;
+}
+
+ul.wakulinebox {
+    padding-bottom: 10px;
+}
+
+ul.wakulinebox li {
+    float: left;
+}
+
+ul.wakulinebox li:first-child {
+    width: 25%;
+}
+
+ul.wakulinebox li:last-child {
+    width: 74%;
+}
+
+.eyebtn {
+    cursor: pointer;
+}
+
+.eyeoff {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.resetBtnCommon {
+    border: 2px solid #000;
+    background: #fff;
+    padding: 0 5px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: ponter;
+    line-height: 25px;
+}
+
+.resetBtnCommon:hover {
+    color: dodgerblue;
+    border: 2px solid dodgerblue;
+}
+
+#textareaTXT,
+#textareaTXT2 {
+    height: 2.3em;
+    width: 98%;
+    border: 1px solid #ccc;
+    padding: 3px;
+}
+
+div#tnlist {
+    margin-bottom: 12px;
+}
+
+div#tnlist ul li {
+    background: #ccc;
+    background-size: 490px 45px;
+    background-repeat: none;
+    float: left;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #eee;
+    margin-right: 3px;
+    margin-bottom: 3px;
+}
+
+div#tnlist ul li.selected {
+    border: 3px solid #333;
+}
+
+div#tnlist ul li:nth-child(2) {
+    background-position: -50px 0;
+}
+
+div#tnlist ul li:nth-child(3) {
+    background-position: -100px 0;
+}
+
+div#tnlist ul li:nth-child(4) {
+    background-position: -150px 0;
+}
+
+div#tnlist ul li:nth-child(5) {
+    background-position: -200px 0;
+}
+
+div#tnlist ul li:nth-child(6) {
+    background-position: -250px 0;
+}
+
+div#tnlist ul li:nth-child(7) {
+    background-position: -300px 0;
+}
+
+div#tnlist ul li:nth-child(8) {
+    background-position: -350px 0;
+}
+
+div#tnlist ul li:nth-child(9) {
+    background-position: -400px 0;
+}
+
+div#tnlist ul li:nth-child(10) {
+    background-position: -450px 0;
+}
+
+
+div.input-range {
+    width: 100%;
+}
+
+div.input-range input {
+    width: 100%;
+}
+
+div#formatBox p {
+    font-size: 12px;
+    padding-top: 6px;
+    line-height: 1.3em;
+    color: #fff;
+}
+
+ul#format {
+    margin-bottom: 0;
+}
+
+ul#format li {
+    background: #fff;
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 33%;
+    float: left;
+
+}
+
+ul#format li a {
+    height: 90px;
+    display: block;
+    border: 3px solid #333;
+    background: url(../img/ico_dl.png) no-repeat 50% 80%;
+    text-align: center;
+    line-height: 75px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+}
+
+ul#format li a:hover {
+    background: #eee url(../img/ico_dl.png) no-repeat 50% 80%;
+    ;
+}
+
+ul#format li:nth-child(2) a {
+    border-left: none;
+    border-right: none;
+}
+
+ul#downBtnIE {
+    display: none;
+}
+
+ul#downBtnIE li {
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 33%;
+    float: left;
+}
+
+ul#downBtnIE li a {
+    height: 90px;
+    display: block;
+    border: 3px solid #333;
+    background: url(../img/ico_dl.png) no-repeat 50% 80%;
+    text-align: center;
+    line-height: 75px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+}
+
+ul#downBtnIE li a:hover {
+    background: #eee url(../img/ico_dl.png) no-repeat 50% 80%;
+    ;
+}
+
+ul#downBtnIE li:nth-child(2) a {
+    border-left: none;
+    border-right: none;
+}
+
+
+div#adsingle {
+    padding: 16px 0;
+}
+
+div#aiepsWrap {
+    display: none;
+}
+
+div#aiepsWrap p {
+    font-size: 0.75em;
+}
+
+ul#aieps {
+    margin-bottom: 10px;
+}
+
+ul#aieps li {
+    border: 3px solid #000;
+    cursor: pointer;
+    width: 50%;
+    padding: 5px 20px;
+    background: url(../img/ico_dl.png) no-repeat 5% 50%;
+    text-align: center;
+    font-weight: bold;
+    text-indent: 12px;
+    background: #fff;
+}
+
+ul#aieps li:hover {
+    background: #eee url(../img/ico_dl.png) no-repeat 5% 50%;
+    ;
+}
+
+aside#adR {
+    display: none;
+}
+
+/* download popup */
+
+div#fileDownCover {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.8;
+    z-index: 9000;
+}
+
+div#fileDown {
+    box-sizing: border-box;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: 20px;
+    width: 88%;
+    margin-left: -44%;
+    border: 5px solid #CCC;
+    padding: 0 10px 10px 10px;
+    z-index: 9500;
+    background: #fff;
+}
+
+div#fileDown p.dl_lead {
+    margin: 0;
+    margin-left: -10px;
+    padding: 0;
+    line-height: 45px;
+    text-indent: 60px;
+    background: #CCC url(../img/bgs.png) -550px 0px no-repeat;
+}
+
+div#fileDownClose {
+    width: 50px;
+    height: 50px;
+    background: #f00 url(../img/btn_close.png);
+    cursor: pointer;
+    text-indent: -9999px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+
+div#dlBtnbox p {
+    text-align: center;
+    letter-spacing: 1.1;
+}
+
+div#dlBtnbox p span {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+div#ADdown {
+    margin-top: 12px;
+}
+
+div#dlBtnboxBtn {
+    display: none;
+    width: 50%;
+    height: 2.5em;
+    line-height: 2.5em;
+    text-align: center;
+    margin: 0 auto;
+    color: #fff;
+    background: #4ABA00;
+    border-bottom: 4px solid #093;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+div#dlBtnboxBtn:hover {
+    background: #FC0;
+    border-bottom: 4px solid #F90;
+}
+
+div#dlBtnboxBtn a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+}
+
+#waitIMG {
+    padding: 15px 0;
+}
+
+/* editmenu */
+
+div#formatBoxSP {
+    padding: 6px 0 0;
+    border-top: 1px solid #ccc;
+}
+
+div#formatBox {
+    display: none;
+}
+
+div#formatBoxSP h3 {
+    text-indent: -9999px;
+    width: 25%;
+    position: absolute;
+    left: 10px;
+    top: 50px;
+    height: 40px;
+    background: url(../img/ico_spDl.png) no-repeat;
+}
+
+div#formatBoxSP p {
+    font-size: 12px;
+    padding-top: 18px;
+    line-height: 1.3em;
+}
+
+ul#formatSP {
+    position: relative;
+    left: 25%;
+    width: 75%;
+}
+
+
+
+ul#formatSP li {
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 33%;
+    float: left;
+
+}
+
+
+
+ul#formatSP li a {
+    height: 40px;
+    display: block;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+}
+
+
+
+ul#formatSP li:nth-child(2) a {
+
+    border-left: none;
+    border-right: none;
+}
+
+section#spEditMenu {
+    position: fixed;
+    background: #fff;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+    padding-top: 2px;
+    border-top: 3px solid #000;
+}
+
+ul#editMenu {
+    padding: 0px 5px 5px;
+}
+
+ul#editMenu li {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /*    width: 18%;*/
+    width: 22.2%;
+    float: left;
+    text-align: right;
+
+}
+
+ul#editMenu li:nth-child(1) {
+    width: 33%;
+}
+
+ul#editMenu li i {
+    background: url(../img/ico_spEdit.png);
+    width: 40px;
+    height: 40px;
+    display: block;
+}
+
+ul#editMenu li:nth-child(1) i {
+    background-position: 0px 0;
+}
+
+ul#editMenu li:nth-child(2) i {
+    background-position: -40px 0;
+}
+
+ul#editMenu li:nth-child(3) i {
+    background-position: -80px 0;
+}
+
+ul#editMenu li:nth-child(4) i {
+    background-position: -120px 0;
+}
+
+ul#editMenu li:nth-child(5) i {
+    background-position: -160px 0;
+}
+
+section#spEditcontrler {
+
+    position: fixed;
+    bottom: 96px;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    padding: 10px;
+    z-index: 800;
+}
+
+div#btn_menuClose {
+    position: absolute;
+    top: -15px;
+    right: 15px;
+    background: #fff;
+    border-radius: 32px;
+    cursor: pointer;
+    display: none;
+}
+
+#infoBox {
+    max-width: 650px;
+}
+
+.catInfobox {
+    padding-bottom: 10px;
+    font-size: 14px;
+}
+
+.catInfobox a {
+    display: inline-block;
+    padding: 3px 12px;
+    background: #f7df79;
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #000;
+}
+
+.catInfobox a:hover {
+    background: #f2c7a0;
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #999;
+}
+
+#adMobile {
+    max-height: 300px;
+}
+
+@media only screen and (min-width:600px) {
+
+    div#imgWrap {
+        padding: 10px;
+    }
+    div#imgWrap h3 {
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+    div#imgBox {
+        position: absolute;
+        left: 350px;
+        width: 512px;
+        margin-right: 35px;
+        background: url(../img/bg_imgmain.png);
+        float: left;
+    }
+
+
+    section#ulWrap {
+        width: 300px;
+        padding: 10px;
+        padding-bottom: 20px;
+    }
+    p.ctTxt {
+        font-size: 0.75em;
+        padding: 4px 0;
+        line-height: 1.4em;
+    }
+    div#sizeBox {
+        /*
+    max-width:490px;
+    width:40%;
+*/
+        margin-bottom: 25px;
+
+    }
+
+    ul#size {
+        display: none
+    }
+    ul#size li {
+        float: left;
+        width: 16%;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #000;
+        border-right: none;
+        text-align: center;
+    }
+    ul#size li:last-child {
+        border-right: 1px solid #000;
+    }
+    ul#size li a {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        color: #000;
+    }
+    ul#size li a.selected {
+        background: #eee;
+    }
+    div#colorBox {
+        max-width: 490px;
+        position: relative;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+    button#reset {
+        position: absolute;
+        top: -10px;
+        right: 0;
+        font-size: 12px;
+    }
+    ul#colors {}
+    div#imgWrap ul#colors > li {
+        margin-bottom: 10px;
+        height: 42px;
+        display: inline-flex;
+        padding-bottom: 15px;
+    }
+
+    div#imgWrap ul#colors > li label {
+        line-height: 42px;
+        display: inline-block;
+        width: 60px;
+        font-size: 12px;
+        height: 42px;
+    }
+    div#imgWrap ul#colors input {
+        border: none;
+        width: 100px;
+        padding: 10px;
+        line-height: 30px;
+        display: inline-block;
+        border: 1px solid #eee;
+        text-align: center;
+        position: relative;
+        height: 22px;
+    }
+
+
+
+    div#imgWrap ul#colors > li:nth-child(4) {
+        display: block;
+        position: relative;
+    }
+    div#imgWrap ul#colors > li:nth-child(4) div {
+        width: 200px;
+        position: absolute;
+        top: 12px;
+        left: 80px;
+        display: block;
+    }
+    div#imgWrap ul#colors > li:nth-child(5) {
+        display: block;
+        position: relative;
+    }
+    div#imgWrap ul#colors > li:nth-child(5) div {
+        width: 200px;
+        position: absolute;
+        top: 12px;
+        left: 80px;
+        display: block;
+    }
+    div#tnlist {
+        margin-bottom: 12px;
+    }
+    div#tnlist ul li {
+        background-size: 500px 50px;
+        background-repeat: none;
+        float: left;
+        width: 50px;
+        height: 50px;
+        border: 3px solid #eee;
+        margin-right: 3px;
+        margin-bottom: 3px;
+    }
+    div#tnlist ul li.selected {
+        border: 3px solid #333;
+    }
+    div#tnlist ul li:nth-child(2) {
+        background-position: -50px 0;
+    }
+    div#tnlist ul li:nth-child(3) {
+        background-position: -100px 0;
+    }
+    div#tnlist ul li:nth-child(4) {
+        background-position: -150px 0;
+    }
+    div#tnlist ul li:nth-child(5) {
+        background-position: -200px 0;
+    }
+    div#tnlist ul li:nth-child(6) {
+        background-position: -250px 0;
+    }
+    div#tnlist ul li:nth-child(7) {
+        background-position: -300px 0;
+    }
+    div#tnlist ul li:nth-child(8) {
+        background-position: -350px 0;
+    }
+    div#tnlist ul li:nth-child(9) {
+        background-position: -400px 0;
+    }
+    div#tnlist ul li:nth-child(10) {
+        background-position: -450px 0;
+    }
+
+
+    div.input-range {
+        width: 100%;
+    }
+    div.input-range input {
+        width: 100%;
+    }
+    div#dLButtons {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+    }
+    div#dLButtons h4 {
+        font-size: 14px;
+        width: 25%;
+        line-height: 90px;
+        text-align: center;
+    }
+    div#formatBox {
+        display: block;
+
+    }
+    section#spEditMenu,
+    section#spEditcontrler {
+        display: none;
+    }
+    div#formatBox p {
+        font-size: 12px;
+        padding-top: 6px;
+        line-height: 1.3em;
+    }
+    ul#format {
+        width: 75%;
+    }
+    ul#format li {
+        box-sizing: border-box;
+        cursor: pointer;
+        width: 33%;
+        float: left;
+
+    }
+
+    ul#format li a {
+        height: 90px;
+        display: block;
+        border: 3px solid #333;
+        background: url(../img/ico_dl.png) no-repeat 50% 80%;
+        text-align: center;
+        line-height: 75px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #000;
+    }
+    ul#format li a:hover {
+        background: #eee url(../img/ico_dl.png) no-repeat 50% 80%;
+        ;
+    }
+    ul#format li:nth-child(2) a {
+        border-left: none;
+        border-right: none;
+    }
+    ul#downBtnIE {
+        display: none;
+    }
+    ul#downBtnIE li {
+        box-sizing: border-box;
+        cursor: pointer;
+        width: 33%;
+        float: left;
+    }
+    ul#downBtnIE li a {
+        height: 90px;
+        display: block;
+        border: 3px solid #333;
+        background: url(../img/ico_dl.png) no-repeat 50% 80%;
+        text-align: center;
+        line-height: 75px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #000;
+    }
+    ul#downBtnIE li a:hover {
+        background: #eee url(../img/ico_dl.png) no-repeat 50% 80%;
+        ;
+    }
+    ul#downBtnIE li:nth-child(2) a {
+        border-left: none;
+        border-right: none;
+    }
+    div#fileDown {
+        width: 680px;
+        margin-left: -340px;
+
+    }
+    ul#editMenu {
+        display: none;
+    }
+
+
+    div#tagInfo {
+        padding: 12px 0;
+    }
+
+    div#tagInfo a {
+        color: #f27c3b;
+        font-size: 0.85em;
+    }
+    div#aiepsWrap {
+        display: block;
+    }
+    div#btn_menuClose {
+        display: none;
+    }
+}
+
+@media only screen and (min-width:1540px) {
+    aside#adR {
+        display: block;
+        width: 160px;
+        position: fixed;
+        top: 150px;
+        left: 0px;
+    }
+}

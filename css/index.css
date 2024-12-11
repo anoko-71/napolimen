@@ -1,0 +1,489 @@
+@import url(common.css);
+/* モダンパターン柄 */
+main section {
+  background-image: url(../img/TOPpage/modan.png);
+  background-blend-mode: luminosity;
+}
+
+/* メインビジュアル */
+div.visualgroup {
+  position: relative;
+}
+/* 仮↓ */
+/* div.container {
+  position: relative;
+  background-color: aqua;
+} */
+
+p.catchphrase {
+  position: absolute;
+  color: #e9eff3;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.35);
+  font-size: 41px;
+  line-height: 1.4em;
+  text-align: left;
+  max-width: 334px;
+  top: 50px;
+  left: 18%;
+}
+
+p.caption {
+  position: absolute;
+  bottom: 42px;
+  left: 18%;
+}
+
+p.visual {
+  background-color: #372d2d;
+  background-image: url(../img/TOPpage/modan.png);
+  background-blend-mode: luminosity;
+}
+
+/* ナポリの男たちとは */
+main section.toha {
+  padding-bottom: 124px;
+}
+
+/* 小見出し */
+
+/* ↓hgroupにグラデ下線画像 （元々の設定）*/
+/* main section.toha hgroup {
+  background-image: url(../img/TOPpage/Line1.png);
+  background-repeat: no-repeat;
+  background-position: left 59px bottom;
+  padding-left: 670px;
+  margin-bottom: 44px;
+  background-color: aqua;
+  position: relative;
+} */
+main section.toha hgroup {
+  position: relative;
+  padding-top: 190px;
+}
+
+/*  -webkit-background-clip: text; テキストで切り抜く */
+/* 背景色にグラデーションを指定 */
+/* -webkit-text-fill-color: transparent; 切り抜いた部分は背景を表示  */
+section.toha h2 {
+  font-size: 40px;
+  background: linear-gradient(90deg, #b15a4b, #2f3437);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* padding-top: 97px; */
+  position: absolute;
+  top: 97px;
+  right: 53px;
+}
+/* グラデ線 */
+section.toha h2::after {
+  content: "";
+  display: block;
+  width: 660px;
+  border-bottom: 3px solid;
+  border-image: linear-gradient(90deg, #fbfcef, #b15a4b) 1;
+  margin-left: -670px;
+  margin-top: -5px;
+}
+section.toha hgroup p {
+  font-size: 50px;
+  font-family: "Elsie", serif;
+  background: linear-gradient(#e0ddd0, #cdc8bb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: absolute;
+  top: 75px;
+  right: 144px;
+  /* right: 144px; */
+  /* top: 75px; */
+  z-index: -1;
+}
+
+/* ラジオ画像説明 */
+section.toha div.setumei {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 9px;
+  align-items: center;
+  position: relative;
+}
+
+div.setumei img {
+  margin-left: 75px;
+}
+
+div.setumei p.setumei {
+  font-size: 21px;
+  text-align: left;
+  border: 0.8px solid #cdc8bb;
+  padding: 51px 46px;
+  margin-right: 60px;
+}
+
+/* 文字に銃アイコンを重ねるには、親（main div.flexbox）にposition:relative;を設定し、子にposition:absolute;にして重ね順を決めて（z-index）親の位置から場所を調整（今回はrightとbottom）figmaの長方形ツールを使って長さを計ったり、プレビューの検証で数値動かしてみてみる */
+main div.container p.gun {
+  position: absolute;
+  /* z-index: 1; */
+  right: 20px;
+  bottom: -50px;
+}
+
+/* メンバー紹介 */
+main section.member {
+  background-color: #222222;
+  background-image: url(../img/TOPpage/modan.png), url(../img/TOPpage/memberframe_toppage.png);
+  background-blend-mode: luminosity, normal;
+  background-repeat: repeat, no-repeat;
+  background-position: left top, center 65px;
+  /* margin-top: 75px; */
+}
+main section.member h2 {
+  padding-top: 124px;
+  padding-bottom: 26px;
+  /*中央揃えなし時 padding-left: 461px; */
+}
+main section.member p.card {
+  /* 中央揃えなし時padding-left: 79px; */
+  padding-bottom: 36px;
+}
+/* スマホ用メンバーカード非表示 */
+section.member p.card_575 {
+  display: none;
+}
+
+/* MOREリンク */
+main p.morelink a {
+  color: #f5f1ed;
+  font-size: 24px;
+  font-family: "Elsie", serif;
+  border: 1px dashed #f5f1ed;
+  display: block;
+  padding: 8px 58px;
+  width: fit-content;
+  margin: 0px auto 60px;
+  background-image: url(../img/TOPpage/arrow.png);
+  background-repeat: no-repeat;
+  background-position: right 22px center;
+  /* ↓リンクの下線なし */
+  text-decoration: none;
+}
+main p.morelink a:hover {
+  background-color: rgba(245, 241, 237, 0.2);
+  transition: 0.3s;
+}
+/* MOREリンク共通で下余白あり  */
+section.member p.morelink {
+  padding-bottom: 115px;
+}
+
+/* お知らせ */
+main section.news {
+  padding-top: 90px;
+}
+
+main section.news h2 {
+  padding-bottom: 50px;
+}
+
+main section.news dl {
+  overflow: auto;
+  height: 280px;
+  padding: 20px 10px;
+  max-width: 709px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  text-align: left;
+}
+main section.news dl dt {
+  padding-bottom: 17px;
+}
+
+main section.news dl dd {
+  padding-bottom: 17px;
+  border-bottom: 1px solid #2f3437;
+  margin-bottom: 17px;
+}
+
+/* スクロール設定 */
+main section.news dl::-webkit-scrollbar {
+  background: #f5f1ed;
+  width: 4px;
+  height: 10px;
+  border-radius: 20px;
+}
+main section.news dl::-webkit-scrollbar-thumb {
+  background-color: #2f3437;
+  border-radius: 20px;
+}
+
+main section.news p.morelink_black a {
+  color: #262222;
+  font-size: 24px;
+  font-family: "Elsie", serif;
+  border: 1px dashed #262222;
+  display: block;
+  padding: 8px 58px;
+  width: fit-content;
+  margin: 0px auto;
+  background-image: url(../img/TOPpage/arrow_black.png);
+  background-repeat: no-repeat;
+  background-position: right 22px center;
+  text-decoration: none;
+}
+main section.news p.morelink_black a:hover {
+  background-color: rgba(38, 34, 34, 0.2);
+  transition: 0.3s;
+}
+main section.news div.container {
+  position: relative;
+  padding-bottom: 90px;
+}
+main section.news p.books {
+  position: absolute;
+  right: 90px;
+  bottom: 48px;
+}
+
+/* 動画紹介 */
+main section.video {
+  background-color: #222;
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+
+main section.video h2 {
+  padding-bottom: 50px;
+}
+section.video ul {
+  display: flex;
+  color: #fbfcef;
+  font-size: 12px;
+  justify-content: center;
+  column-gap: 50px;
+  padding-bottom: 46px;
+}
+
+section.video ul li figcaption {
+  padding-top: 20px;
+}
+/* レスポンシブ時、margin設定で本来普通のpxより大きくしたら余白ができた。じゃないと動画重なってしまう */
+section.video ul li {
+  margin: 40px 60px;
+}
+
+/* youtube埋め込み可変用設定 */
+/* レスポンシブ時にwidthをmax-widthにし、width: 100%;を追記、じゃないと動画サイズ対応しなかった */
+section.video figure iframe {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+/* 前の矢印 */
+img.prev {
+  position: absolute;
+  top: 66%;
+  transform: translateY(-120%);
+  /* デフォルトの数値変えた（モバイルメニュー重なるため）
+  z-index: 999; */
+  z-index: 1;
+  left: 260px;
+  cursor: pointer;
+}
+
+/* 次の矢印 */
+img.next {
+  position: absolute;
+  top: 66%;
+  transform: translateY(-120%);
+  /* デフォルトの数値変えた（モバイルメニュー重なるため） */
+  /* z-index: 999; */
+  z-index: 1;
+  right: 260px;
+  cursor: pointer;
+}
+/* 真ん中の動画を検証するとliにクラス名(slick-current)ある。クラス指定してスケールを100%より大きくすると、他の動画より大きくなる*/
+li.slick-current {
+  transform: scale(120%);
+}
+/* VIDEOのスライドボタン */
+/* ↓デフォルト矢印を調整したものだが使わない */
+/* .slick-next {
+  right: 295px;
+  transform: translate(0, -245%);
+}
+.slick-prev {
+  left: 285px;
+  z-index: 1;
+  transform: translate(0, -245%);
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 35px;
+  color: #721723;
+} */
+
+/* セクション＿注意書き */
+aside.attention {
+  padding: 60px 15px 0;
+}
+.attention_box {
+  max-width: 824px;
+  background-color: #232121;
+  margin: 0 auto;
+  border: 1px solid #b83d3d;
+}
+.attention_box .p_box {
+  max-width: 665px;
+  margin: 0 auto;
+}
+.attention_box p {
+  color: #b83d3d;
+  font-size: 16px;
+  text-align: left;
+  line-height: 1.5;
+  padding: 40px 20px;
+}
+
+/* レスポンシブ */
+@media (max-width: 767px) {
+}
+@media (max-width: 575px) {
+  /* ビジュアル画像と中の文字 */
+  p.visual img {
+    height: 400px;
+    object-fit: cover;
+    object-position: 75% 0;
+  }
+  p.caption {
+    max-width: 200px;
+    bottom: 20px;
+    left: 5%;
+  }
+  p.catchphrase {
+    font-size: 18px;
+    line-height: 1.4em;
+    text-align: left;
+    max-width: 155px;
+    top: 5%;
+    left: 5%;
+  }
+
+  /* ナポリの男たちとは */
+  main section.toha {
+    padding-bottom: 80px;
+  }
+  section.toha div.setumei {
+    display: block;
+    column-gap: 9px;
+    text-align: left;
+  }
+
+  main section.toha hgroup {
+    padding-top: 30px;
+  }
+  section.toha h2 {
+    font-size: 24px;
+    position: absolute;
+    top: 153px;
+    right: 15px;
+    z-index: 2;
+  }
+  section.toha h2::after {
+    content: none;
+  }
+  section.toha hgroup p {
+    font-size: 32px;
+    position: absolute;
+    top: 136px;
+    right: 15px;
+    z-index: 1;
+  }
+  div.setumei img {
+    height: 150px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    z-index: -2;
+  }
+  div.setumei p.setumei {
+    font-size: 15px;
+    text-align: left;
+    border: 0.8px solid #cdc8bb;
+    padding: 20px 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  div.container p.gun img {
+    height: 65px;
+  }
+
+  /* メンバー紹介 */
+  section.member p.card {
+    display: none;
+    /* padding-bottom: 36px; */
+  }
+  section.member p.card_575 {
+    display: block;
+    padding-bottom: 15px;
+  }
+  main section.member h2 img {
+    height: 40px;
+    margin-top: 10px;
+  }
+  main section.member h2 {
+    padding-top: 53px;
+    padding-bottom: 20px;
+  }
+  main section.member {
+    background-image: url(../img/TOPpage/modan.png), url(../img/TOPpage/memberframe_toppage\ 2.png);
+    background-position: left top, center 20px;
+  }
+  main p.morelink a {
+    font-size: 17px;
+    padding: 6px 55px;
+    margin: 0px auto;
+  }
+  /* MOREリンク共通で下余白あり  */
+  section.member p.morelink {
+    padding-bottom: 97px;
+  }
+
+  /* お知らせ */
+  main section.news dl {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  main section.news p.books img {
+    height: 130px;
+  }
+  main section.news p.books {
+    right: 0px;
+    bottom: 9px;
+  }
+  main section.news div.container {
+    padding-bottom: 100px;
+  }
+  main section.news p.morelink_black a {
+    font-size: 17px;
+    padding: 6px 55px;
+  }
+
+  /* 動画紹介 */
+  section.video ul li {
+    margin: 40px 26px;
+  }
+
+  /* 前の矢印 */
+  img.prev {
+    top: 57%;
+    left: 5px;
+  }
+
+  /* 次の矢印 */
+  img.next {
+    top: 57%;
+    right: 5px;
+  }
+}

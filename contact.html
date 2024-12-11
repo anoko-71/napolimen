@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Napolimen</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <script src="JS/jquery-3.7.1.min.js"></script>
+    <script src="JS/header.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1><img src="img/TOPpage/napolimenicon.png" alt="icon"></h1>
+            <!-- ↓ハンバーガーメニュー -->
+            <button class="hmenu"><span></span></button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">TOP</a></li>
+                    <li><a href="news.html">NEWS</a></li>
+                    <li><a href="member.html">MEMBER</a></li>
+                    <li><a href="schedule.html">SCHEDULE</a></li>
+                    <li><a href="video.html">VIDEO</a></li>
+                    <li><a href="goods.html">GOODS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <main>
+        <h2><img src="img/CONTACTpage/contacttitle.png" alt="お問い合わせ"></h2>
+        <div class="h3_border">
+            <h3>お問い合わせ</h3>
+        </div>
+        <p class="guide">仕事のご相談・ご依頼などはこちらへどうぞ</p>
+        <!-- フォームメーラー -->
+        <form action="https://ssl.form-mailer.jp/fm/service/Forms/complete" method="post" name="form1" enctype="multipart/form-data" accept-charset="UTF-8">
+            <input type="hidden" name="key" value="80382f01837512">
+
+            <dl>
+                <div>
+                    <dt class="item">氏名</dt>
+                    <dd class="required">必須</dd>
+                </div>
+                <dd class="input"><input type="text" name="field_7324262" placeholder="山田　太郎" required></dd>
+                <div>
+                    <dt class="item">フリガナ</dt>
+                    <dd class="required">必須</dd>
+                </div>
+                <dd class="input"><input type="text" name="field_7325381" placeholder="ヤマダ　タロウ" required></dd>
+                <div>
+                    <dt class="item">メールアドレス</dt>
+                    <dd class="required">必須</dd>
+                </div>
+                <dd class="input"><input type="email" name="field_7324264" placeholder="yamada000@xxx.jp" required></dd>
+
+                <!-- 電話番号のみ<div>無し -->
+                <dt class="tel">電話番号</dt>
+                <dd class="input"><input type="tel" name="field_7324254" placeholder="xxx-xxxx-xxxx"></dd>
+
+                <div>
+                    <dt class="item">お問い合わせ内容</dt>
+                    <dd class="required">必須</dd>
+                </div>
+
+                <dd class="input"><textarea name="field_7324265" placeholder="お問い合わせされる内容をご入力ください。" required></textarea></dd>
+
+                <span>
+                    <dt class="policy"><a href="#">プライバシーポリシー</a>に同意する</dt>
+                    <dd><label><input type="checkbox" name="field_7324273" value="0">同意する</label></dd>
+                </span>
+            </dl>
+            <p><button>送信する</button></p>
+            <input type="hidden" name="code" value="utf8">
+        </form>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <!-- リンク： -->
+            <!-- target="_blank" rel="noreferrer noopener"はセキュリティ対策 -->
+            <aside>
+                <ul>
+                    <li><a href="https://www.youtube.com/@napolimens" target="_blank" rel="noreferrer noopener"><img src="img/TOPpage/youtubewhite.png"></a></li>
+
+                    <li><a href="https://ch.nicovideo.jp/naporich" target="_blank" rel="noreferrer noopener"><img src="img/TOPpage/niconicowhite.png"></a></li>
+
+                    <li class="demo"><a href="https://x.com/napolimens?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank" rel="noreferrer noopener"><img src="img/TOPpage/Xwhite.png"></a></li>
+                </ul>
+            </aside>
+
+            <ul class="supportmenu">
+                <li><a href="#">二次創作ガイドライン</a></li>
+                <li><a href="#">お問い合わせ</a></li>
+                <li><a href="#">メンバー登録</a></li>
+                <li><a href="#">プライバシーポリシー</a></li>
+                <li><a href="#">利用規約</a></li>
+            </ul>
+
+            <p class="copyright">&copy;2024 Napolimen. All rights reserved.</p>
+            <p class="icon"><a href="index.html"><img src="img/TOPpage/napolimeniconfooter.png" alt="icon"></a></p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="JS/script.js"></script>
+</body>
+</html>
