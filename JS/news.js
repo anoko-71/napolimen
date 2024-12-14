@@ -23,3 +23,18 @@ $("main div.xrelative p.x a img").hover(
     );
   }
 );
+
+// まだ設定反映されていない未完成↓1215
+// ページアクティブ時のページ数ボタンの色変更
+// アクティブページのリンク色変える
+href = location.href;
+var links = jQuery("ul.pagelink li a");
+//classを付与したいaタグを含めた階層をカッコ内に記述
+
+console.log(links);
+links.each(function (index, value) {
+  if (value.href == href) {
+    jQuery("ul.pagelink li a").children("a").eq(index).addClass("active");
+    //classを付与したいaタグまでの階層をjQueryカッコ内に記述
+  }
+});

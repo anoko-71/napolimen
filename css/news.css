@@ -74,7 +74,17 @@ dl dd {
   padding-bottom: 100px;
   padding-top: 42px;
 }
-.container li.firstpage {
+/* .container li.firstpage {
+  font-size: 20px;
+  color: #a6c7c0;
+  background: #854242;
+  padding: 9px 15px 9px;
+  width: fit-content;
+  display: block;
+} */
+
+/* ページ数 */
+ul.pagelink li.firstpage a {
   font-size: 20px;
   color: #a6c7c0;
   background: #854242;
@@ -82,16 +92,8 @@ dl dd {
   width: fit-content;
   display: block;
 }
-.container li.secondpage {
-  font-size: 20px;
-  color: #854242;
-  background: #a6c7c0;
-  padding: 9px 15px 9px;
-  width: fit-content;
-  display: block;
-  cursor: pointer;
-}
-.container li.thirdpage {
+/* ページアクティブ時の色 */
+ul.pagelink li a.active {
   font-size: 20px;
   color: #854242;
   background: #a6c7c0;
@@ -101,9 +103,27 @@ dl dd {
   cursor: pointer;
 }
 
-.container ul.pagelink a {
+ul.pagelink li.secondpage a {
+  font-size: 20px;
+  color: #854242;
+  background: #a6c7c0;
+  padding: 9px 15px 9px;
+  width: fit-content;
+  display: block;
+  cursor: pointer;
+}
+ul.pagelink li.thirdpage a {
+  font-size: 20px;
+  color: #854242;
+  background: #a6c7c0;
+  padding: 9px 15px 9px;
+  width: fit-content;
+  display: block;
+  cursor: pointer;
+}
+
+ul.pagelink a {
   text-decoration: none;
-  color: inherit;
 }
 
 @media (max-width: 575px) {
