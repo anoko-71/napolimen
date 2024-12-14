@@ -88,6 +88,10 @@ a.youtubelink {
   max-width: 68px;
   width: 7vw;
 }
+/* hacchiのみyoutubeないためXの位置調整 */
+a.X_hacchi {
+  right: 18%;
+}
 
 /* メンバー選択 */
 .select_yohaku {
@@ -262,6 +266,10 @@ section.select {
     max-width: 68px;
     width: 11vw;
     min-width: 55px;
+  }
+  /* hacchiのみyoutubeないためXの位置調整 */
+  a.X_hacchi {
+    right: 18%;
   }
 
   /* jsプログラムで.cardbox見えた時に.hyoujiを追加させ、カードが広がるアニメーションをつける */
