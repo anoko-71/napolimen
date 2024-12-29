@@ -19,12 +19,14 @@ p.catchphrase {
   position: absolute;
   color: #e9eff3;
   text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.35);
-  font-size: 41px;
+  /* font-size: 41px; */
   line-height: 1.4em;
   text-align: left;
-  max-width: 334px;
+  /* max-width: 334px; */
   top: 50px;
-  left: 18%;
+  left: 17%;
+  font-size: max(3vw, 20px);
+  max-width: 28vw;
 }
 
 p.caption {
@@ -99,25 +101,41 @@ section.toha hgroup p {
   z-index: -1;
 }
 
-/* ラジオ画像説明 */
+/* ナポリの男たちとは */
 section.toha div.setumei {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: center;
   column-gap: 9px;
   align-items: center;
   position: relative;
+  /* 子の高さを親に合わせる */
+  align-items: normal;
 }
-
+div.setumei .flex_radio {
+  /* flex: 1; */
+  max-width: 75%;
+  display: flex;
+  align-items: center;
+}
 div.setumei img {
-  margin-left: 75px;
+  /* margin-left: 75px; */
+  margin-left: 15px;
+  max-width: 100%;
 }
-
-div.setumei p.setumei {
-  font-size: 21px;
-  text-align: left;
+div.setumei .flex_overview {
+  /* flex: auto; */
   border: 0.8px solid #cdc8bb;
-  padding: 51px 46px;
-  margin-right: 60px;
+  margin-right: 15px;
+  margin-left: 20px;
+  max-width: 58%;
+}
+div.setumei p.setumei {
+  font-size: max(1.2vw, 15px);
+  line-height: 1.5;
+  text-align: left;
+  margin: 51px auto;
+  max-width: 75%;
 }
 
 /* 文字に銃アイコンを重ねるには、親（main div.flexbox）にposition:relative;を設定し、子にposition:absolute;にして重ね順を決めて（z-index）親の位置から場所を調整（今回はrightとbottom）figmaの長方形ツールを使って長さを計ったり、プレビューの検証で数値動かしてみてみる */
@@ -125,7 +143,7 @@ main div.container p.gun {
   position: absolute;
   /* z-index: 1; */
   right: 20px;
-  bottom: -50px;
+  bottom: -70px;
 }
 
 /* メンバー紹介 */
@@ -350,28 +368,6 @@ aside.attention {
 
 /* レスポンシブ */
 @media (max-width: 767px) {
-}
-@media (max-width: 575px) {
-  /* ビジュアル画像と中の文字 */
-  p.visual img {
-    height: 400px;
-    object-fit: cover;
-    object-position: 75% 0;
-  }
-  p.caption {
-    max-width: 200px;
-    bottom: 20px;
-    left: 5%;
-  }
-  p.catchphrase {
-    font-size: 18px;
-    line-height: 1.4em;
-    text-align: left;
-    max-width: 155px;
-    top: 5%;
-    left: 5%;
-  }
-
   /* ナポリの男たちとは */
   main section.toha {
     padding-bottom: 80px;
@@ -392,6 +388,7 @@ aside.attention {
     right: 15px;
     z-index: 2;
   }
+  /* 線非表示 */
   section.toha h2::after {
     content: none;
   }
@@ -406,18 +403,37 @@ aside.attention {
     height: 150px;
     margin-left: 20px;
     margin-bottom: 10px;
-    z-index: -2;
+    /* z-index: -2; */
   }
-  div.setumei p.setumei {
-    font-size: 15px;
-    text-align: left;
-    border: 0.8px solid #cdc8bb;
-    padding: 20px 10px;
-    margin-right: 10px;
-    margin-left: 10px;
+  div.setumei .flex_overview {
+    max-width: 100%;
   }
+  /* 銃アイコン */
   div.container p.gun img {
     height: 65px;
+  }
+  main div.container p.gun {
+    bottom: -50px;
+}
+@media (max-width: 575px) {
+  /* ビジュアル画像と中の文字 */
+  p.visual img {
+    height: 400px;
+    object-fit: cover;
+    object-position: 75% 0;
+  }
+  p.caption {
+    max-width: 200px;
+    bottom: 20px;
+    left: 5%;
+  }
+  p.catchphrase {
+    font-size: 18px;
+    line-height: 1.4em;
+    text-align: left;
+    max-width: 155px;
+    top: 5%;
+    left: 5%;
   }
 
   /* メンバー紹介 */
