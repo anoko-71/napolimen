@@ -30,7 +30,8 @@ p.catchphrase {
 p.caption {
   position: absolute;
   bottom: 42px;
-  left: 18%;
+  left: 13%;
+  width: 40vw;
 }
 
 p.visual {
